@@ -36,9 +36,35 @@ export default class DiscussionSection extends Component {
     })
   }
   renderComments() {
+    const inputHeight = 40;
     if (this.state.discussions.length == 0) {
       return (
-        <Text>No Comments</Text>
+        <View>
+          <Text>No Comments</Text>
+        <View style={{ flex: 1, height: inputHeight, marginTop: 10, flexDirection: 'row', borderColor: '#CCC', borderTopWidth: 1, paddingTop: 15 }}>
+          <TextInput
+            style={{ flex: 1, height: inputHeight, padding: 3, borderColor: 'gray', backgroundColor: '#FFF', borderWidth: 1 }}
+            onChangeText={(text) => this.setState({text})}
+            value={this.state.text}
+          />
+          <ConcensusButton
+            style={{ height: inputHeight, fontSize: 17, marginLeft: 7, marginTop: 0, marginBottom: 0 }}
+            label='Post'
+            onPress={() => {
+              if (this.state.text != ""){
+                newComment(this.props.pollID, {
+                  author: this.props.userID || "andy",
+                  body: this.state.text
+                })
+              }
+              this.setState({
+                text: ""
+              })
+            }
+            }
+          />
+        </View>
+        </View>
       );
     } else {
       const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
@@ -50,20 +76,22 @@ export default class DiscussionSection extends Component {
               renderRow={(post) => <DiscussionPost post={post} />}
             />
           </ScrollView>
-          <View style={{ flex: 1, marginTop: 10, flexDirection: 'row', borderColor: '#CCC', borderTopWidth: 1, paddingTop: 15 }}>
+          <View style={{ flex: 1, height: inputHeight, marginTop: 10, flexDirection: 'row', borderColor: '#CCC', borderTopWidth: 1, paddingTop: 15 }}>
             <TextInput
-              style={{ flex: 1, height: 40, padding: 3, borderColor: 'gray', backgroundColor: '#FFF', borderWidth: 1 }}
+              style={{ flex: 1, height: inputHeight, padding: 3, borderColor: 'gray', backgroundColor: '#FFF', borderWidth: 1 }}
               onChangeText={(text) => this.setState({text})}
               value={this.state.text}
             />
             <ConcensusButton
-              style={{ flex: 1, fontSize: 13, marginLeft: 7, marginTop: 0, marginBottom: 0 }}
+              style={{ height: inputHeight, fontSize: 17, marginLeft: 7, marginTop: 0, marginBottom: 0 }}
               label='Post'
               onPress={() => {
-                newComment(this.props.pollID, {
-                  author: this.props.userID || "andy",
-                  body: this.state.text
-                })
+                if (this.state.text != ""){
+                  newComment(this.props.pollID, {
+                    author: this.props.userID || "andy",
+                    body: this.state.text
+                  })
+                }
                 this.setState({
                   text: ""
                 })

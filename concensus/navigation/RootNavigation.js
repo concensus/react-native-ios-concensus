@@ -4,6 +4,8 @@ import { StackNavigator } from 'react-navigation';
 import MainScreen from '../screens/MainScreen';
 import NewPollScreen from '../screens/NewPollScreen';
 import PollScreen from '../screens/PollScreen';
+import JoinPollScreen from '../screens/JoinPollScreen';
+import PollResultsScreen from '../screens/PollResultsScreen';
 
 import registerForPushNotificationsAsync from '../api/registerForPushNotificationsAsync';
 
@@ -17,13 +19,28 @@ const RootStackNavigator = StackNavigator(
     },
     Poll: {
       screen: PollScreen,
+    },
+    JoinPoll: {
+      screen: JoinPollScreen,
+    },
+    PollResults: {
+      screen: PollResultsScreen,
     }
   },
   {
     navigationOptions: () => ({
+      headerTitleAllowFontScaling: false,
+      headerStyle: {
+        backgroundColor: '#EFEFEF'
+      },
       headerTitleStyle: {
         fontWeight: 'normal',
+        fontFamily: 'Baskerville',
+        color: '#333',
+        fontSize: 20
       },
+      headerBackTitle: null,
+      headerTintColor: '#333'
     }),
   }
 );

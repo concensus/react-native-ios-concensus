@@ -4,13 +4,26 @@ import {
 } from 'react-native';
 import ConcensusButton from '../components/ConcensusButton';
 
+import { Fingerprint } from "expo";
+
 const MainScreen = ({ navigation }) => {
   function onProposeMotionPress() {
     navigation.navigate('NewPoll');
   }
 
   function onWeighInPress() {
-    navigation.navigate('Poll');
+    navigation.navigate('JoinPoll');
+  }
+
+  async function onAuthorizePress() {
+    try {
+      const response = await Fingerprint.authenticateAsync("Authorize Your Vote");
+      console.log("Authenticated: " + response.success);
+      // do something with response
+    } catch(error) {
+      // do something with error
+    }
+
   }
 
   return (
