@@ -2,7 +2,7 @@ import React from 'react';
 import {
   ListView
 } from 'react-native';
-import CommentSection from '../components/CommentSection'
+import DiscussionSection from '../components/DiscussionSection'
 
 export default class HomeScreen extends React.Component {
   constructor() {
@@ -12,7 +12,7 @@ export default class HomeScreen extends React.Component {
 
   render() {
     return (
-        <CommentSection pollID="poll-id"/>
+        <DiscussionSection pollID="poll-id"/>
     );
   }
 }
