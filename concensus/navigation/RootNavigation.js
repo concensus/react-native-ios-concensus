@@ -3,8 +3,9 @@ import React from 'react';
 import { StackNavigator } from 'react-navigation';
 import MainScreen from '../screens/MainScreen';
 import NewPollScreen from '../screens/NewPollScreen';
-import PollScreen from '../screens/PollScreen';
+import ParticipantView from '../screens/ParticipantView';
 import JoinPollScreen from '../screens/JoinPollScreen';
+import PollResultsScreen from '../screens/PollResultsScreen';
 
 import registerForPushNotificationsAsync from '../api/registerForPushNotificationsAsync';
 
@@ -17,10 +18,13 @@ const RootStackNavigator = StackNavigator(
       screen: NewPollScreen,
     },
     Poll: {
-      screen: PollScreen,
+      screen: ParticipantView,
     },
     JoinPoll: {
       screen: JoinPollScreen,
+    },
+    PollResults: {
+      screen: PollResultsScreen,
     }
   },
   {
