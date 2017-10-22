@@ -27,8 +27,8 @@ export default class VoteComponent extends React.Component {
     const response = await Fingerprint.authenticateAsync("Authorize Your Vote");
     console.log("Authenticated: " + response.success + ", vote: " + vote);
 
-    if (response.success){
-      //Checkmark animation here
+    if (response.success) {
+      // TODO: (rcheung) - Navigate to PollResults upon expiry
       navigate('PollResults')
     }
     else {
@@ -63,7 +63,7 @@ export default class VoteComponent extends React.Component {
 
         <ConcensusButton
           style={{marginTop: 20, backgroundColor: '#888'}}
-          onPress={() => this.onPressButton(VOTE_ENUM.NO, navigate)}
+          onPress={() => this.props.startTimer()}
           label={"Meh"}
         />
         <Text style={{ color: '#666', textAlign: 'center'}}>I'm okay with this, but would like more time for discussion for it to better meet my needs.</Text>
