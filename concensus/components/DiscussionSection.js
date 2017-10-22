@@ -9,6 +9,7 @@ import {
   View,
   ListView
 } from 'react-native';
+import DiscussionPost from './DiscussionPost';
 import {firebase, isEmpty} from "../api/firebase"
 
 export default class DiscussionSection extends Component {
@@ -31,10 +32,12 @@ export default class DiscussionSection extends Component {
     this.state = {
       discussions: ds.cloneWithRows([
         {
-          author: "andy"
+          author: "andy",
+          body: 'Have we considered the preferred banana ripeness?'
         },
         {
-          author: "andya"
+          author: "andya",
+          body: 'But which day of the week should the bananas be delivered?'
         }
       ]),
     };
@@ -45,8 +48,9 @@ export default class DiscussionSection extends Component {
     }else{
       return(
         <ListView
+          style={{ paddingLeft: 7 }}
           dataSource={this.state.discussions}
-          renderRow={(rowData) => <Text>{rowData.author}</Text>}
+          renderRow={(post) => <DiscussionPost post={post} />}
         />
       )
     }
