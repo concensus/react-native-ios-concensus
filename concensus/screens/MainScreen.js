@@ -1,8 +1,9 @@
 import React from 'react';
 import {
     Button,
-    ScrollView,
+    View,
 } from 'react-native';
+import baseStyles from './shared/baseStyles';
 
 const MainScreen = ({ navigation }) => {
   const onProposeMotionPress = ()  => {
@@ -10,13 +11,13 @@ const MainScreen = ({ navigation }) => {
   };
 
   return (
-    <ScrollView styles={{ padding: 20 }}>
+    <View style={{ padding: 20 }}>
       <Button
         style={styles.button}
         title="Propose a Motion"
         onPress={onProposeMotionPress}
       />
-    </ScrollView>
+    </View>
   );
 };
 MainScreen.navigationOptions = ({ navigation }) => ({
@@ -27,7 +28,8 @@ export default MainScreen;
 
 const styles = {
   button: {
-    fontFamily: 'Baskerville',
-    fontSize: '30px'
+    ...baseStyles,
+    fontSize: '30px',
+    fontWeight: 'bold'
   }
 };
