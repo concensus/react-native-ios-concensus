@@ -13,7 +13,8 @@ const MainScreen = ({ navigation }) => {
   }
 
   function onWeighInPress() {
-    navigation.navigate('JoinPoll');
+    navigation.navigate('Poll');
+    // navigation.navigate('JoinPoll');
   }
 
   function onCreatePress() {
