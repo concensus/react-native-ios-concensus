@@ -31,7 +31,7 @@ const RootStackNavigator = StackNavigator(
     PollResults: {
       screen: PollResultsScreen,
     },
-    QRCodeShowerScreen: {
+    QRCodeShower: {
       screen: QRCodeShowerScreen,
     }
   },
