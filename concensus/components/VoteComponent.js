@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 import {
   Text,
 	View
@@ -24,13 +25,23 @@ export default class VoteComponent extends React.Component {
     const userID = 'Andy';
     const response = await Fingerprint.authenticateAsync("Authorize Your Vote");
 
-    if (response.success) {
-      // TODO: (rcheung) - Send firebase request to persist selection
-      console.log("Authenticated: " + response.success + ", vote: " + vote);
-      updateUserVote(userID, vote);
-
-      // TODO: (rcheung) - Navigate to PollResults upon expiry
-      // navigate('PollResults')
+      if (response.success){
+          // navigate('PollResults')
+          updateUserVote(userID, vote);
+          if (vote === VOTE_ENUM.MAYBE) {
+              this.props.startTimer();
+          }
+      //Checkmark animation here
+      axios.post("https://8fcefb12.ngrok.io/", {
+        voteType: vote,
+        account: "0x267042459ba40cd52ff2711bb6c95963f4b76da6"
+      })
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
     }
   }
 

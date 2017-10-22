@@ -4,13 +4,16 @@ import {
   ScrollView,
 } from 'react-native';
 import ConcensusButton from '../components/ConcensusButton';
+import axios from "axios";
 const t = require('tcomb-form-native');
 const Form = t.form.Form;
 
 const NewPollScreen = ({navigation}) => {
-    
+
   function onProposePress() {
     navigation.navigate('QRCodeShower');
+
+    axios.post('http://8fcefb12.ngrok.io/createPoll');
   }
 
   return (

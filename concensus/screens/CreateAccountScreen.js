@@ -14,7 +14,8 @@ const CreateAccountScreen = ({ navigation }) => {
 
   function onAuthenticatePress() {
     //TODO: Twilio API call goes here
-    axios.post('https://8fcefb12.ngrok.io/send/Andyyy').then(res=>{
+    console.log(Poll.enterName)
+    axios.post(`https://8fcefb12.ngrok.io/send/4084313552@andy`).then(res=>{
         AlertIOS.prompt(
           "Enter verification code.",
           "Enter the SMS code that was just texted to you.",
@@ -27,6 +28,7 @@ const CreateAccountScreen = ({ navigation }) => {
           ]
         )
     }).catch(console.log)
+
   }
 
   return (
