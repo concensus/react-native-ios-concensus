@@ -4,6 +4,8 @@ import {
 } from 'react-native';
 import ConcensusButton from '../components/ConcensusButton';
 
+import { Fingerprint } from "expo";
+
 const MainScreen = ({ navigation }) => {
   function onProposeMotionPress() {
     navigation.navigate('NewPoll');
@@ -11,6 +13,17 @@ const MainScreen = ({ navigation }) => {
 
   function onWeighInPress() {
     navigation.navigate('JoinPoll');
+  }
+
+  async function onAuthorizePress() {
+    try {
+      const response = await Fingerprint.authenticateAsync("Authorize Your Vote");
+      console.log("Authenticated: " + response.success);
+      // do something with response
+    } catch(error) {
+      // do something with error
+    }
+
   }
 
   return (
@@ -23,6 +36,10 @@ const MainScreen = ({ navigation }) => {
         label='Weigh In'
         underlayColor='#888'
         onPress={onWeighInPress} />
+        <ConcensusButton
+          label='Authorize Vote'
+          underlayColor='#888'
+          onPress={onAuthorizePress} />
     </View>
   );
 };
