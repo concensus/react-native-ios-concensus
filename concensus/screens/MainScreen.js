@@ -5,18 +5,29 @@ import {
 } from 'react-native';
 
 const MainScreen = ({ navigation }) => {
-    const onProposeMotionPress = ()  => {
-        navigation.navigate('NewPoll');
-    };
+  const onProposeMotionPress = ()  => {
+    navigation.navigate('NewPoll', { title: 'Propose a Motion' });
+  };
 
-    return (
-        <ScrollView>
-            <Button
-                title="Propose a Motion"
-                onPress={onProposeMotionPress}
-            />
-        </ScrollView>
-    );
+  return (
+    <ScrollView styles={{ padding: 20 }}>
+      <Button
+        style={styles.button}
+        title="Propose a Motion"
+        onPress={onProposeMotionPress}
+      />
+    </ScrollView>
+  );
 };
+MainScreen.navigationOptions = ({ navigation }) => ({
+  title: 'Concensus',
+});
 
 export default MainScreen;
+
+const styles = {
+  button: {
+    fontFamily: 'Baskerville',
+    fontSize: '30px'
+  }
+};
