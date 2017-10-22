@@ -20,14 +20,6 @@ export default class DiscussionSection extends Component {
   }
 
   componentDidMount(){
-    var id = this.props.pollID;
-    let discussionRef = firebase.database().ref(`polls/${id}/discussions`);
-    // discussionRef.on('child_added', data => {
-    //   console.log("data1", data)
-    // });
-    // discussionRef.on('child_changed', data => {
-    //   console.log("data2", data)
-    // });
     this.getDiscussion();
     // newComment(id, {
     //   author: "andy2",
