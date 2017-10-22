@@ -1,0 +1,97 @@
+import React from 'react';
+import {
+  Button, 
+	StyleSheet, 
+	ScrollView, 
+	Text, 
+	Image,
+	View 
+} from 'react-native';
+<<<<<<< HEAD
+<<<<<<< HEAD
+import { StackNavigator } from 'react-navigation'
+=======
+>>>>>>> 2298c22... Progress
+=======
+import { StackNavigator } from 'react-navigation'
+>>>>>>> 4e852a8... Hi
+
+  export default class VoteComponent extends React.Component {
+
+    constructor(props) {
+     super(props);
+    /*
+    */
+    console.log(this.props.numVotes);
+  }
+
+<<<<<<< HEAD
+=======
+  onPressYes(event) {
+    console.log("Voting yes!")
+  }
+
+>>>>>>> 2298c22... Progress
+  onPressMeh(event) {
+    console.log("Voting meh!")
+  }
+
+<<<<<<< HEAD
+=======
+  onPressNo(event) {
+    console.log("Voting no!")
+  }
+
+>>>>>>> 2298c22... Progress
+  render() {
+    /* Go ahead and delete ExpoConfigView and replace it with your
+    * content, we just wanted to give you a quick view of your config */
+
+    let radioGroupData = [{label:`Yes! I fully endorse this proposition.`, value:`1`},
+    {label:`I'm okay with this, but would like more time for discussion for it to better meet my needs.`, value:`2`},
+    {label:`No! This counteracts my needs.`, value:`3`}]
+
+    let pic = {
+      uri: 'https://upload.wikimedia.org/wikipedia/commons/d/de/Bananavarieties.jpg'
+    };
+
+<<<<<<< HEAD
+<<<<<<< HEAD
+    const { navigate } = this.props;
+
+    return (
+    	<View>
+        <Button
+          onPress={() => navigate('PollResults')}
+=======
+    return (
+    	<View>
+        <Button
+          onPress={this.onPressYes}
+>>>>>>> 2298c22... Progress
+=======
+    const { navigate } = this.props.navigation;
+
+    return (
+    	<View>
+        <Button
+          onPress={this.onPressYes)}
+>>>>>>> 4e852a8... Hi
+          title={"Yes! I fully endorse this proposition."}
+        />
+        <Button
+          onPress={this.onPressMeh}
+          title={"I'm okay with this, but would like more time for discussion for it to better meet my needs."}
+        />
+        <Button
+<<<<<<< HEAD
+          onPress={() => navigate('PollResults')}
+=======
+          onPress={this.onPressNo}
+>>>>>>> 2298c22... Progress
+          title={"No! This counteracts my needs."}
+        />
+      </View>
+      );
+  }
+}
