@@ -1,12 +1,9 @@
 import React from 'react';
 import {
-  Button, 
-	StyleSheet, 
-	ScrollView, 
-	Text, 
-	Image,
-	View 
+  Text,
+	View
 } from 'react-native';
+import ConcensusButton from './ConcensusButton'
 
   export default class VoteComponent extends React.Component {
 
@@ -26,30 +23,40 @@ import {
     /* Go ahead and delete ExpoConfigView and replace it with your
     * content, we just wanted to give you a quick view of your config */
 
-    let radioGroupData = [{label:`Yes! I fully endorse this proposition.`, value:`1`},
-    {label:`I'm okay with this, but would like more time for discussion for it to better meet my needs.`, value:`2`},
-    {label:`No! This counteracts my needs.`, value:`3`}]
+    let radioGroupData = [
+      {label:`Yes! I fully endorse this proposition.`, value:`1`},
+      {label:`I'm okay with this, but would like more time for discussion for it to better meet my needs.`, value:`2`},
+      {label:`No! This counteracts my needs.`, value:`3`}
+    ];
 
     let pic = {
       uri: 'https://upload.wikimedia.org/wikipedia/commons/d/de/Bananavarieties.jpg'
     };
 
-    const { navigate } = this.props;
+    const { navigate, style = {} } = this.props;
 
     return (
-    	<View>
-        <Button
+    	<View style={{...style}}>
+        <ConcensusButton
+          style={{backgroundColor: '#31823d'}}
           onPress={() => navigate('PollResults')}
-          title={"Yes! I fully endorse this proposition."}
+          label={"Yes"}
         />
-        <Button
+        <Text style={{ color: '#666', textAlign: 'center'}}>I fully endorse this proposition.</Text>
+
+        <ConcensusButton
+          style={{marginTop: 20, backgroundColor: '#888'}}
           onPress={this.onPressMeh}
-          title={"I'm okay with this, but would like more time for discussion for it to better meet my needs."}
+          label={"Meh"}
         />
-        <Button
+        <Text style={{ color: '#666', textAlign: 'center'}}>I'm okay with this, but would like more time for discussion for it to better meet my needs.</Text>
+
+        <ConcensusButton
+          style={{marginTop: 20, backgroundColor: '#aa2517'}}
           onPress={() => navigate('PollResults')}
-          title={"No! This counteracts my needs."}
+          label={"No"}
         />
+        <Text style={{ color: '#666', textAlign: 'center'}}>This counteracts my needs.</Text>
       </View>
       );
   }
