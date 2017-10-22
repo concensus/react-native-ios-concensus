@@ -21,9 +21,18 @@ const RootStackNavigator = StackNavigator(
   },
   {
     navigationOptions: () => ({
+      headerTitleAllowFontScaling: false,
+      headerStyle: {
+        backgroundColor: '#EFEFEF'
+      },
       headerTitleStyle: {
         fontWeight: 'normal',
+        fontFamily: 'Baskerville',
+        color: '#333',
+        fontSize: 20
       },
+      headerBackTitle: null,
+      headerTintColor: '#333'
     }),
   }
 );
