@@ -1,16 +1,27 @@
 import React from 'react';
 import {
-    ScrollView,
+  View,
+  ScrollView,
 } from 'react-native';
+import ConcensusButton from '../components/ConcensusButton';
 const t = require('tcomb-form-native');
 const Form = t.form.Form;
 
 const NewPollScreen = () => {
-    return (
-        <ScrollView style={{ padding: 20 }}>
-            <Form style={styles.baseFont} type={Poll}/>
-        </ScrollView>
-    );
+  function onProposePress() {
+  }
+
+  return (
+    <View style={{ padding: 20 }}>
+      <ScrollView>
+        <Form style={styles.baseFont} type={Poll}/>
+      </ScrollView>
+      <ConcensusButton
+        label='Propose Motion'
+        onPress={onProposePress}
+      />
+    </View>
+  );
 };
 
 NewPollScreen.navigationOptions = ({ navigation }) => ({
@@ -25,10 +36,10 @@ const Conditions = t.enums({
 });
 
 const Poll = t.struct({
-  title: t.String,
-  summary: t.String,
-  deadline: t.Date,
-  conditions: Conditions,
+  subject: t.String,
+  proposal: t.String,
+  endsInMinutes: t.Number,
+  concensusPercentage: t.Number,
 });
 
 const baseFont = {
