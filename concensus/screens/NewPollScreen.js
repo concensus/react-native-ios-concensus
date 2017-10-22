@@ -14,7 +14,7 @@ const NewPollScreen = () => {
   return (
     <View style={{ padding: 20 }}>
       <ScrollView>
-        <Form style={styles.baseFont} type={Poll}/>
+        <Form type={Poll}/>
       </ScrollView>
       <ConcensusButton
         label='Propose Motion'
@@ -30,26 +30,9 @@ NewPollScreen.navigationOptions = ({ navigation }) => ({
 
 export default NewPollScreen;
 
-const Conditions = t.enums({
-  MAJORITY: 'Majority',
-  ALL_IN: 'All-in (100% Consensus)'
-});
-
 const Poll = t.struct({
   subject: t.String,
   proposal: t.String,
   endsInMinutes: t.Number,
   consensusPercentage: t.Number,
 });
-
-const baseFont = {
-  fontFamily: 'Baskerville',
-};
-
-const styles = {
-    baseFont,
-    header: {
-      ...baseFont,
-      fontSize: 30,
-    }
-};

@@ -3,6 +3,7 @@ import React from 'react';
 import { StackNavigator } from 'react-navigation';
 import MainScreen from '../screens/MainScreen';
 import NewPollScreen from '../screens/NewPollScreen';
+import PollScreen from '../screens/PollScreen';
 
 import registerForPushNotificationsAsync from '../api/registerForPushNotificationsAsync';
 
@@ -13,6 +14,9 @@ const RootStackNavigator = StackNavigator(
     },
     NewPoll: {
       screen: NewPollScreen,
+    },
+    Poll: {
+      screen: PollScreen,
     }
   },
   {

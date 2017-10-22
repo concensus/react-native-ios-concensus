@@ -9,6 +9,8 @@ const button = {
   fontSize: 30,
   padding: 10,
   textAlign: 'center',
+  marginTop: 5,
+  marginBottom: 5
 };
 
 export default {
