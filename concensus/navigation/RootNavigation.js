@@ -3,7 +3,7 @@ import React from 'react';
 import { StackNavigator } from 'react-navigation';
 import MainScreen from '../screens/MainScreen';
 import NewPollScreen from '../screens/NewPollScreen';
-import ParticipantView from '../screens/ParticipantView';
+import PollScreen from '../screens/PollScreen';
 import JoinPollScreen from '../screens/JoinPollScreen';
 import PollResultsScreen from '../screens/PollResultsScreen';
 
@@ -18,7 +18,7 @@ const RootStackNavigator = StackNavigator(
       screen: NewPollScreen,
     },
     Poll: {
-      screen: ParticipantView,
+      screen: PollScreen,
     },
     JoinPoll: {
       screen: JoinPollScreen,

@@ -1,33 +1,59 @@
 import React from 'react';
-import {
-  Text,
-  View,
-  ScrollView,
+import { 
+  Dimensions,
+	StyleSheet, 
+	ScrollView, 
+	Text, 
+	Image,
+	View 
 } from 'react-native';
-import DiscussionSection from '../components/DiscussionSection';
+import PollComponent from '../components/PollComponent.js'
+import VoteComponent from '../components/VoteComponent.js'
+import DiscussionSection from '../components/DiscussionSection.js'
 
-class PollScreen extends React.Component {
-  onVotePress() {
-  }
+export default class PollScreen extends React.Component {
 
   render() {
+    /* Go ahead and delete ExpoConfigView and replace it with your
+    * content, we just wanted to give you a quick view of your config */
+
+    const navigate = this.props.navigation.navigate
+
+    let pic = {
+      uri: 'https://upload.wikimedia.org/wikipedia/commons/d/de/Bananavarieties.jpg'
+    };
+
+    let {height, width} = Dimensions.get('window')
+    console.log('height', height)
+
+    let styles = StyleSheet.create({
+      contentContainer: {
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center'},
+      view: {
+        height: height},
+      scrollContainer: {
+        height: height
+      }
+    })
+
     return (
-      <ScrollView style={{ padding: 20, flex: 1, flexDirection: 'column' }}>
-        <View style={{ paddingBottom: 20, marginBottom: 20, borderBottomWidth: 1, borderBottomColor: '#333', borderStyle: 'solid' }}>
-          <Text>Participant View</Text>
+      <View style={styles.scrollContainer}>
+      <ScrollView horizontal={false}
+                  pagingEnabled={true}>
+        <View style={styles.view}>
+          <PollComponent numVotes={3}
+                         title="Should we get bagels?"
+                         description="placeholder for discussion"></PollComponent>
+          <VoteComponent navigate={navigate}></VoteComponent>
         </View>
-        <View style={{ flexGrow: 1 }}>
-          <DiscussionSection
-            pollID="poll-id"
-          />
-        </View>
+        <View style={styles.view}>
+          <DiscussionSection pollID={"HI"}></DiscussionSection>
+        </View> 
       </ScrollView>
-    );
+
+      </View>
+      );
   }
 }
-
-PollScreen.navigationOptions = ({ navigation, subject }) => ({
-  title: subject || 'Weigh In',
-});
-
-export default PollScreen;
