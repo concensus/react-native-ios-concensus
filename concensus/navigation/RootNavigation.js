@@ -4,6 +4,7 @@ import { StackNavigator } from 'react-navigation';
 import MainScreen from '../screens/MainScreen';
 import NewPollScreen from '../screens/NewPollScreen';
 import PollScreen from '../screens/PollScreen';
+import JoinPollScreen from '../screens/JoinPollScreen';
 
 import registerForPushNotificationsAsync from '../api/registerForPushNotificationsAsync';
 
@@ -17,6 +18,9 @@ const RootStackNavigator = StackNavigator(
     },
     Poll: {
       screen: PollScreen,
+    },
+    JoinPoll: {
+      screen: JoinPollScreen,
     }
   },
   {
