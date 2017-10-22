@@ -48,7 +48,7 @@ class PollScreen extends React.Component {
         <View style={styles.view}>
           <PollComponent numVotes={3}
                          title="Should we get bagels?"
-                         description="placeholder for discussion"></PollComponent>
+                         description="Bagels and hotdog are both really important for our college life. So should we get bagels?"></PollComponent>
           <VoteComponent style={{ marginTop: 40 }}
                          navigate={navigate}>
           </VoteComponent>

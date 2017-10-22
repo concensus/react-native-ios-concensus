@@ -41,7 +41,6 @@ export default class App extends Component {
     const { onBarCodeRead } = this.props;
     return (
       <View style={styles.container}>
-
         {this.state.hasCameraPermission === null
           ? <Text>Requesting for camera permission</Text>
           : this.state.hasCameraPermission === false
@@ -54,7 +53,9 @@ export default class App extends Component {
                 height: Dimensions.get('window').height,
                 width: Dimensions.get('window').width,
               }}
-            />}
+            >
+              <View style={styles.scannerInnerView}></View>
+            </BarCodeScanner>}
 
         {this._maybeRenderUrl()}
 
@@ -107,6 +108,15 @@ export default class App extends Component {
 }
 
 const styles = StyleSheet.create({
+  scannerInnerView: {
+    width: 200,
+    height:200,
+    borderRadius: 1,
+    borderWidth: 3,
+    borderColor: 'rgba(255,255,255,0.7)',
+    marginLeft: Dimensions.get('window').width/2-100,
+    marginTop: Dimensions.get('window').height/2-115
+  },
   container: {
     flex: 1,
     alignItems: 'center',
