@@ -11,6 +11,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import { BarCodeScanner, Permissions } from 'expo';
+import { debounce } from 'lodash';
 
 export default class App extends Component {
   state = {
@@ -37,7 +38,6 @@ export default class App extends Component {
   };
 
   render() {
-    console.log(this.props);
     const { onBarCodeRead } = this.props;
     return (
       <View style={styles.container}>
@@ -49,7 +49,7 @@ export default class App extends Component {
               Camera permission is not granted
             </Text>
             : <BarCodeScanner
-              onBarCodeRead={onBarCodeRead || this._handleBarCodeRead}
+              onBarCodeRead={debounce(onBarCodeRead || this._handleBarCodeRead, 725).bind(this)}
               style={{
                 height: Dimensions.get('window').height,
                 width: Dimensions.get('window').width,
