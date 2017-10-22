@@ -7,8 +7,10 @@ import ConcensusButton from '../components/ConcensusButton';
 const t = require('tcomb-form-native');
 const Form = t.form.Form;
 
-const NewPollScreen = () => {
+const NewPollScreen = ({navigation}) => {
+    
   function onProposePress() {
+    navigation.navigate('RQCodeShower');
   }
 
   return (

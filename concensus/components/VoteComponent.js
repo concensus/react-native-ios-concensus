@@ -14,8 +14,6 @@ const VOTE_ENUM = {
 
 export default class VoteComponent extends React.Component {
 
-
-
   constructor(props) {
      super(props);
     /*
