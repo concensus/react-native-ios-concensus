@@ -1,7 +1,8 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import QrCodeScanner from '../components/QrCodeScanner';
 
-function JoinPollScreen({ navigation }) {
+function JoinPollScreen({ navigation, createPoll }) {
   const poll = {
     id: 'poll1',
     subject: "Should we get bagels?",
@@ -10,10 +11,16 @@ function JoinPollScreen({ navigation }) {
     discussionExpiryInMinutes: 5,
   };
 
-  function onBarCodeRead() {
+  function initPoll(poll) {
+    createPoll(poll);
     navigation.navigate('Poll', { poll });
   }
 
+  function onBarCodeRead() {
+    initPoll(poll);
+  }
+
+  initPoll(poll);
   return (
     <QrCodeScanner
       onBarCodeRead={onBarCodeRead}
@@ -25,4 +32,10 @@ JoinPollScreen.navigationOptions = ({ navigation, subject }) => ({
   title: subject || 'Scan QR Code to Vote',
 });
 
-export default JoinPollScreen;
+function bindActions(dispatch) {
+  return {
+    createPoll: (poll) => dispatch({ type: 'CREATE_POLL', poll }),
+  };
+}
+
+export default connect(() => ({}), bindActions)(JoinPollScreen);

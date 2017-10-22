@@ -1,12 +1,18 @@
 import React from 'react';
-import { Platform, StatusBar, StyleSheet, View } from 'react-native';
+import { AsyncStorage, Platform, StatusBar, StyleSheet, View } from 'react-native';
 import { AppLoading, Asset, Font } from 'expo';
 import { Ionicons } from '@expo/vector-icons';
 import RootNavigation from './navigation/RootNavigation';
 
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
+import { persistStore } from 'redux-persist';
+import reducer from './reducers';
+
 export default class App extends React.Component {
   state = {
     isLoadingComplete: false,
+    store: configureStore(() => this.setState({ isLoading: false })),
   };
 
   render() {
@@ -20,12 +26,14 @@ export default class App extends React.Component {
       );
     } else {
       return (
-        <View style={styles.container}>
-          {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
-          {Platform.OS === 'android' &&
-          <View style={styles.statusBarUnderlay} />}
-          <RootNavigation />
-        </View>
+        <Provider store={this.state.store}>
+          <View style={styles.container}>
+            {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
+            {Platform.OS === 'android' &&
+            <View style={styles.statusBarUnderlay} />}
+            <RootNavigation />
+          </View>
+        </Provider>
       );
     }
   }
@@ -67,3 +75,10 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(0,0,0,0.2)',
   },
 });
+
+function configureStore(onCompletion) {
+  const store = createStore(reducer);
+  persistStore(store, { storage: AsyncStorage }, onCompletion);
+
+  return store;
+}

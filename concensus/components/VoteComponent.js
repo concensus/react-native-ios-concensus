@@ -6,35 +6,28 @@ import {
 import ConcensusButton from './ConcensusButton'
 import { Fingerprint } from "expo";
 
-const VOTE_ENUM = {
+export const VOTE_ENUM = {
   YES: 0,
   NO: 1,
   MAYBE: 2
-}
+};
 
 export default class VoteComponent extends React.Component {
-
-
-
   constructor(props) {
-     super(props);
-    /*
-    */
+    super(props);
     console.log(this.props.numVotes);
-
   }
 
 
   async onPressButton(vote, navigate) {
     const response = await Fingerprint.authenticateAsync("Authorize Your Vote");
-    console.log("Authenticated: " + response.success + ", vote: " + vote);
 
     if (response.success) {
+      // TODO: (rcheung) - Send firebase request to persist selection
+      console.log("Authenticated: " + response.success + ", vote: " + vote);
+
       // TODO: (rcheung) - Navigate to PollResults upon expiry
-      navigate('PollResults')
-    }
-    else {
-      //Try again animation here
+      // navigate('PollResults')
     }
   }
 
@@ -43,14 +36,10 @@ export default class VoteComponent extends React.Component {
     * content, we just wanted to give you a quick view of your config */
 
     let radioGroupData = [
-      {label:`Yes! I fully endorse this proposition.`, value:`1`},
-      {label:`I'm okay with this, but would like more time for discussion for it to better meet my needs.`, value:`2`},
-      {label:`No! This counteracts my needs.`, value:`3`}
+      {label:`Yes! I fully endorse this proposition.`, value: VOTE_ENUM.YES},
+      {label:`I'm okay with this, but would like more time for discussion for it to better meet my needs.`, value: VOTE_ENUM.MAYBE},
+      {label:`No! This counteracts my needs.`, value: VOTE_ENUM.NO}
     ];
-
-    let pic = {
-      uri: 'https://upload.wikimedia.org/wikipedia/commons/d/de/Bananavarieties.jpg'
-    };
 
     const { navigate, style = {} } = this.props;
 
@@ -61,21 +50,21 @@ export default class VoteComponent extends React.Component {
           onPress={() => this.onPressButton(VOTE_ENUM.YES, navigate)}
           label={"Yes"}
         />
-        <Text style={{ color: '#666', textAlign: 'center'}}>I fully endorse this proposition.</Text>
+        <Text style={{ color: '#666', textAlign: 'center'}}>{radioGroupData[0].label}</Text>
 
         <ConcensusButton
           style={{marginTop: 20, backgroundColor: '#888'}}
           onPress={() => this.onPressButton(VOTE_ENUM.NO, navigate)}
           label={"Meh"}
         />
-        <Text style={{ color: '#666', textAlign: 'center'}}>I'm okay with this, but would like more time for discussion for it to better meet my needs.</Text>
+        <Text style={{ color: '#666', textAlign: 'center'}}>{radioGroupData[1].label}</Text>
 
         <ConcensusButton
           style={{marginTop: 20, backgroundColor: '#aa2517'}}
           onPress={() => this.onPressButton(VOTE_ENUM.MAYBE, navigate)}
           label={"No"}
         />
-        <Text style={{ color: '#666', textAlign: 'center'}}>This counteracts my needs.</Text>
+        <Text style={{ color: '#666', textAlign: 'center'}}>{radioGroupData[2].label}</Text>
       </View>
       );
   }
