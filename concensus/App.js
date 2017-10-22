@@ -23,7 +23,7 @@ export default class App extends React.Component {
         <View style={styles.container}>
           {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
           {Platform.OS === 'android' &&
-            <View style={styles.statusBarUnderlay} />}
+          <View style={styles.statusBarUnderlay} />}
           <RootNavigation />
         </View>
       );
@@ -41,7 +41,9 @@ export default class App extends React.Component {
         Ionicons.font,
         // We include SpaceMono because we use it in HomeScreen.js. Feel free
         // to remove this if you are not using it in your app
-        { 'space-mono': require('./assets/fonts/SpaceMono-Regular.ttf') },
+        { 'Lato-Regular': require('./assets/fonts/Lato-Regular.ttf'),
+          'Lato-Black': require('./assets/fonts/Lato-Black.ttf')
+       },
       ]),
     ]);
   };
@@ -60,7 +62,7 @@ export default class App extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#fff'
   },
   statusBarUnderlay: {
     height: 24,

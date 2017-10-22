@@ -23,3 +23,4 @@ function newComment(id, object){
 }
 
 export {firebase, isEmpty, newComment};
+

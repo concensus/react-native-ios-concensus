@@ -9,7 +9,8 @@ import {
   View,
   ListView
 } from 'react-native';
-import {firebase,newComment} from "../../api/firebase"
+import DiscussionPost from './DiscussionPost';
+import {firebase, newComment} from "../api/firebase"
 
 export default class DiscussionSection extends Component {
   constructor(props) {
@@ -18,15 +19,9 @@ export default class DiscussionSection extends Component {
       discussions: []
     };
   }
-
   componentDidMount(){
     this.getDiscussion();
-    // newComment(id, {
-    //   author: "andy2",
-    //   body: "okkkkk"
-    // })
   }
-
   getDiscussion(){
     var id = this.props.pollID;
     let discussionRef = firebase.database().ref(`polls/${id}/discussions`);
@@ -41,23 +36,24 @@ export default class DiscussionSection extends Component {
       this.setState({ discussions: discussionsSlice })
     })
   }
-  
   renderComments() {
-    const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     if(this.state.discussions.length > 0){
+      const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
       return(
         <ListView
+          style={{ paddingLeft: 7 }}
           dataSource={ds.cloneWithRows(this.state.discussions)}
-          renderRow={(d) => <Text>{d.author}: {d.body}</Text>}
+          renderRow={(post) => <DiscussionPost post={post} />}
         />
       )
     }
-    return <Text>No Comments</Text>;
+    return <Text>No Comments</Text>
   }
 
   render() {
     return (
       <View style={styles.container}>
+        <Text style={styles.heading}>Discourse</Text>
         {this.renderComments()}
       </View>
     );
@@ -67,7 +63,10 @@ export default class DiscussionSection extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
   },
-
+  heading: {
+    fontSize: 25,
+    fontFamily: 'Baskerville',
+    marginBottom: 10
+  }
 });

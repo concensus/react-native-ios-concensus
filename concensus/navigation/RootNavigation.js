@@ -1,15 +1,23 @@
 import { Notifications } from 'expo';
 import React from 'react';
 import { StackNavigator } from 'react-navigation';
+import MainScreen from '../screens/MainScreen';
+import NewPollScreen from '../screens/NewPollScreen';
+import PollScreen from '../screens/PollScreen';
 
-import MainTabNavigator from './MainTabNavigator';
 import registerForPushNotificationsAsync from '../api/registerForPushNotificationsAsync';
 
 const RootStackNavigator = StackNavigator(
   {
-    Main: {
-      screen: MainTabNavigator,
+    Home: {
+      screen: MainScreen,
     },
+    NewPoll: {
+      screen: NewPollScreen,
+    },
+    Poll: {
+      screen: PollScreen,
+    }
   },
   {
     navigationOptions: () => ({
