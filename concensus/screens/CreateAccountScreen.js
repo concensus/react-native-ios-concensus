@@ -28,6 +28,7 @@ const CreateAccountScreen = ({ navigation }) => {
           ]
         )
     }).catch(console.log)
+
   }
 
   return (

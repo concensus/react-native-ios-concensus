@@ -1,11 +1,11 @@
 import React from 'react';
-import { 
+import {
   Dimensions,
-  StyleSheet, 
-  ScrollView, 
-  Text, 
+  StyleSheet,
+  ScrollView,
+  Text,
   Image,
-  View 
+  View
 } from 'react-native';
 import PollComponent from '../components/PollComponent.js'
 import VoteComponent from '../components/VoteComponent.js'
@@ -36,11 +36,11 @@ class PollScreen extends React.Component {
 
     console.log('expiryInMinutes', poll.expiryInMinutes);
     this.state = {
-      timeRemaining: poll.expiryInMinutes * 60, 
+      timeRemaining: poll.expiryInMinutes * 60,
       discussionExpiry: poll.discussionExpiryInMinutes * 60,
-      subject: poll.subject, 
-      description: 
-      poll.description, 
+      subject: poll.subject,
+      description:
+      poll.description,
       id: poll.id,
       meh: false
     };
@@ -51,6 +51,9 @@ class PollScreen extends React.Component {
     setInterval(() => {
       this.setState(previousState => {
         console.log('previousState', previousState.timeRemaining);
+        if (previousState.timeRemaining < 1) {
+          axios.delete("http://8fcefb12.ngrok.io/votes")
+        }
         return {timeRemaining: previousState.timeRemaining - 1}
       });
     }, 1000);
@@ -118,11 +121,11 @@ class PollScreen extends React.Component {
           <View style={styles.view}>
             <Text style={styles.text1}>Time remaining: {timeString}</Text>
             <View style={{height: 10}}></View>
-            <PollComponent 
+            <PollComponent
               numVotes={3}
               title={this.state.subject}
               description={this.state.description}></PollComponent>
-            <VoteComponent 
+            <VoteComponent
               style={{ marginTop: 40 }}
               navigate={navigate}
               startTimer={this.startDiscussionTimer.bind(this)}
@@ -132,10 +135,10 @@ class PollScreen extends React.Component {
           <View style={styles.view}>
             <Text style={styles.text2}>Time remaining in current poll: {timeString}</Text>
             {discussionTimer}
-            <DiscussionSection 
+            <DiscussionSection
               pollID={this.state.id}
               showEntry={this.state.meh}></DiscussionSection>
-          </View> 
+          </View>
         </ScrollView>
       </View>
       );

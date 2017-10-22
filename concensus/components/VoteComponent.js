@@ -27,8 +27,19 @@ export default class VoteComponent extends React.Component {
     const response = await Fingerprint.authenticateAsync("Authorize Your Vote");
     console.log("Authenticated: " + response.success + ", vote: " + vote);
 
-    if (response.success) {
-      // TODO: (rcheung) - Navigate to PollResults upon expiry
+    if (response.success){
+      //Checkmark animation here
+      axios.post("https://8fcefb12.ngrok.io/", {
+        voteType: vote,
+        account: "0x267042459ba40cd52ff2711bb6c95963f4b76da6"
+      })
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+
       navigate('PollResults')
     }
     else {
