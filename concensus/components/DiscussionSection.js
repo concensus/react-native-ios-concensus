@@ -1,16 +1,15 @@
 import React, { Component } from 'react';
 import {
-  Image,
-  Platform,
   ScrollView,
   StyleSheet,
   Text,
-  TouchableOpacity,
+  TextInput,
   View,
   ListView
 } from 'react-native';
 import DiscussionPost from './DiscussionPost';
 import {firebase, newComment} from "../api/firebase"
+import ConcensusButton from './ConcensusButton';
 
 export default class DiscussionSection extends Component {
   constructor(props) {
@@ -26,28 +25,55 @@ export default class DiscussionSection extends Component {
     var id = this.props.pollID;
     let discussionRef = firebase.database().ref(`polls/${id}/discussions`);
     discussionRef.on("value", (snapshot)=>{
-      this.setState({ discussions: [] });
-      var discussionsSlice = this.state.discussions.slice();
+      var discussionsSlice = [];
       snapshot.forEach(child => {
         discussionsSlice.push({
           ...child.val(),
         })
       });
+
       this.setState({ discussions: discussionsSlice })
     })
   }
   renderComments() {
-    if(this.state.discussions.length > 0){
+    if (this.state.discussions.length == 0) {
+      return (
+        <Text>No Comments</Text>
+      );
+    } else {
       const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
-      return(
-        <ListView
-          style={{ paddingLeft: 7 }}
-          dataSource={ds.cloneWithRows(this.state.discussions)}
-          renderRow={(post) => <DiscussionPost post={post} />}
-        />
-      )
+      return (
+        <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'flex-start' }}>
+          <ScrollView style={{ flexGrow: 1 }}>
+            <ListView
+              dataSource={ds.cloneWithRows(this.state.discussions)}
+              renderRow={(post) => <DiscussionPost post={post} />}
+            />
+          </ScrollView>
+          <View style={{ flex: 1, marginTop: 10, flexDirection: 'row', borderColor: '#CCC', borderTopWidth: 1, paddingTop: 15 }}>
+            <TextInput
+              style={{ flex: 1, height: 40, padding: 3, borderColor: 'gray', backgroundColor: '#FFF', borderWidth: 1 }}
+              onChangeText={(text) => this.setState({text})}
+              value={this.state.text}
+            />
+            <ConcensusButton
+              style={{ flex: 1, fontSize: 13, marginLeft: 7, marginTop: 0, marginBottom: 0 }}
+              label='Post'
+              onPress={() => {
+                newComment(this.props.pollID, {
+                  author: this.props.userID || "andy",
+                  body: this.state.text
+                })
+                this.setState({
+                  text: ""
+                })
+              }
+              }
+            />
+          </View>
+        </View>
+      );
     }
-    return <Text>No Comments</Text>
   }
 
   render() {

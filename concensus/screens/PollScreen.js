@@ -4,7 +4,6 @@ import {
   View,
   ScrollView,
 } from 'react-native';
-import ConcensusButton from '../components/ConcensusButton';
 import DiscussionSection from '../components/DiscussionSection';
 
 class PollScreen extends React.Component {
@@ -13,21 +12,17 @@ class PollScreen extends React.Component {
 
   render() {
     return (
-      <View style={{ flex: 1, flexDirection: 'column', padding: 20 }}>
-        <ScrollView>
-          <View style={{ paddingBottom: 20, marginBottom: 20, borderBottomWidth: 1, borderBottomColor: '#333', borderStyle: 'solid' }}>
-            <Text>Participant View</Text>
-          </View>
+      <ScrollView style={{ padding: 20, flex: 1, flexDirection: 'column' }}>
+        <View style={{ paddingBottom: 20, marginBottom: 20, borderBottomWidth: 1, borderBottomColor: '#333', borderStyle: 'solid' }}>
+          <Text>Participant View</Text>
+        </View>
+        <View style={{ flexGrow: 1 }}>
           <DiscussionSection
             pollID="poll-id"
-            />
-        </ScrollView>
-        <ConcensusButton
-          style={{}}
-          label='Submit Vote'
-          onPress={this.onVotePress}
-        />
-      </View>
+            userID="ThisIsNotAndy"
+          />
+        </View>
+      </ScrollView>
     );
   }
 }
