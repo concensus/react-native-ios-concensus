@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
 import {
-  Image,
-  Platform,
   ScrollView,
   StyleSheet,
   Text,
-  TouchableOpacity,
   View,
   ListView
 } from 'react-native';
@@ -43,16 +40,23 @@ export default class DiscussionSection extends Component {
     };
   }
   renderComments() {
-    if(this.state.discussions.length == 0){
-      return <Text>No Comments</Text>
-    }else{
-      return(
-        <ListView
-          style={{ paddingLeft: 7 }}
-          dataSource={this.state.discussions}
-          renderRow={(post) => <DiscussionPost post={post} />}
-        />
-      )
+    if (this.state.discussions.length == 0) {
+      return (
+        <Text>No Comments</Text>
+      );
+    } else {
+      return (
+        <View>
+          <ScrollView>
+            <ListView
+              dataSource={this.state.discussions}
+              renderRow={(post) => <DiscussionPost post={post} />}
+            />
+          </ScrollView>
+          <View style={{flex: 1, flexDirection: 'row'}}>
+          </View>
+        </View>
+      );
     }
   }
 

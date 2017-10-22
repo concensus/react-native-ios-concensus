@@ -6,10 +6,10 @@ export default function DiscussionPost({ post }) {
   return (
     <View style={{ flex: 1, marginTop: 5, marginBottom: 7 }}>
       <View style={{flex: 1, flexDirection: 'row'}}>
-        <View style={{ width: 40, height: 40, borderRadius: 20, backgroundColor: stringToColor(post.author) }}>
-          <Text style={{ backgroundColor: 'transparent', color: '#FFF', fontFamily: 'Baskerville', textAlign: 'center', fontSize: 30 }}>{authorFirstLetter}</Text>
+        <View style={{ width: 30, height: 30, borderRadius: 15, backgroundColor: stringToColor(post.author) }}>
+          <Text style={{ backgroundColor: 'transparent', color: '#FFF', fontFamily: 'Baskerville', textAlign: 'center', fontSize: 23 }}>{authorFirstLetter}</Text>
         </View>
-        <View style={{ paddingLeft: 10}}>
+        <View style={{ paddingLeft: 5 }}>
           <Text style={{ fontWeight: 'bold' }}>{post.author}</Text>
           <Text style={{ fontFamily: 'Baskerville', fontSize: 18 }}>{post.body}</Text>
         </View>
