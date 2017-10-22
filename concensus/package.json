@@ -45,7 +45,7 @@
     "url": "^0.10.3",
     "util": "^0.10.3",
     "vm-browserify": "0.0.4",
-    "web3": "1.0.0-beta.24"
+    "web3": "1.0.0-beta.23"
   },
   "devDependencies": {
     "jest-expo": "^22.0.0"
