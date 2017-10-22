@@ -11,7 +11,7 @@ import PollComponent from '../components/PollComponent.js'
 import VoteComponent from '../components/VoteComponent.js'
 import DiscussionSection from '../components/DiscussionSection.js'
 
-export default class PollScreen extends React.Component {
+class PollScreen extends React.Component {
 
   render() {
     /* Go ahead and delete ExpoConfigView and replace it with your
@@ -23,8 +23,9 @@ export default class PollScreen extends React.Component {
       uri: 'https://upload.wikimedia.org/wikipedia/commons/d/de/Bananavarieties.jpg'
     };
 
-    let {height, width} = Dimensions.get('window')
-    console.log('height', height)
+    let {height, width} = Dimensions.get('window');
+    height = height - 40;
+    console.log('height', height);
 
     let styles = StyleSheet.create({
       contentContainer: {
@@ -32,11 +33,13 @@ export default class PollScreen extends React.Component {
         justifyContent: 'center',
         alignItems: 'center'},
       view: {
-        height: height},
+        height: height,
+        padding: 20
+      },
       scrollContainer: {
         height: height
       }
-    })
+    });
 
     return (
       <View style={styles.scrollContainer}>
@@ -46,7 +49,9 @@ export default class PollScreen extends React.Component {
           <PollComponent numVotes={3}
                          title="Should we get bagels?"
                          description="placeholder for discussion"></PollComponent>
-          <VoteComponent navigate={navigate}></VoteComponent>
+          <VoteComponent style={{ marginTop: 40 }}
+                         navigate={navigate}>
+          </VoteComponent>
         </View>
         <View style={styles.view}>
           <DiscussionSection pollID={"HI"}></DiscussionSection>
@@ -57,3 +62,9 @@ export default class PollScreen extends React.Component {
       );
   }
 }
+
+PollScreen.navigationOptions = ({ navigation, subject }) => ({
+  title: subject || 'Weigh In',
+});
+
+export default PollScreen;

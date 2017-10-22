@@ -47,6 +47,7 @@ export default class DiscussionSection extends Component {
         <Text>No Comments</Text>
       );
     } else {
+      const inputHeight = 40;
       return (
         <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'flex-start' }}>
           <ScrollView style={{ flexGrow: 1 }}>
@@ -55,14 +56,14 @@ export default class DiscussionSection extends Component {
               renderRow={(post) => <DiscussionPost post={post} />}
             />
           </ScrollView>
-          <View style={{ flex: 1, marginTop: 10, flexDirection: 'row', borderColor: '#CCC', borderTopWidth: 1, paddingTop: 15 }}>
+          <View style={{ flex: 1, height: inputHeight, marginTop: 10, flexDirection: 'row', borderColor: '#CCC', borderTopWidth: 1, paddingTop: 15 }}>
             <TextInput
-              style={{ flex: 1, height: 40, padding: 3, borderColor: 'gray', backgroundColor: '#FFF', borderWidth: 1 }}
+              style={{ flex: 1, height: inputHeight, padding: 3, borderColor: 'gray', backgroundColor: '#FFF', borderWidth: 1 }}
               onChangeText={(text) => this.setState({text})}
               value={this.state.text}
             />
             <ConcensusButton
-              style={{ flex: 1, fontSize: 17, marginLeft: 7, marginTop: 0, marginBottom: 0 }}
+              style={{ height: inputHeight, fontSize: 17, marginLeft: 7, marginTop: 0, marginBottom: 0 }}
               label='Post'
               onPress={() => {}}
             />
