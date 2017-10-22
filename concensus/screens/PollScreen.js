@@ -10,16 +10,39 @@ import {
 import PollComponent from '../components/PollComponent.js'
 import VoteComponent, { VOTE_ENUM } from '../components/VoteComponent.js'
 import DiscussionSection from '../components/DiscussionSection.js'
+import { getUserVote } from '../api/firebase';
 
 class PollScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      vote: null
+      vote: null,
+      interval: null
     };
   }
 
+  componentWillMount() {
+    const userID = 'Andy';
+
+    const interval = setInterval(() => {
+      getUserVote(userID)
+        .then(response => {
+          if (response.val()) {
+            console.log('VOTE', response.val().option);
+            this.setState({ vote: response.val().option });
+          }
+        });
+    }, 1000);
+
+    this.setState({ interval });
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.state.interval);
+  }
+
   render() {
+    const userID = 'Andy';
     /* Go ahead and delete ExpoConfigView and replace it with your
     * content, we just wanted to give you a quick view of your config */
 
@@ -54,6 +77,8 @@ class PollScreen extends React.Component {
       }
     });
 
+    const readOnly = this.state.vote !== VOTE_ENUM.MAYBE;
+    console.log('read only', readOnly);
     return (
       <View style={styles.scrollContainer}>
         <ScrollView horizontal={false}
@@ -68,7 +93,8 @@ class PollScreen extends React.Component {
           </View>
           <View style={styles.view}>
             <DiscussionSection pollID={id}
-                               readOnly={this.state.vote !== VOTE_ENUM.MAYBE}/>
+                               userID={userID}
+                               readOnly={readOnly}/>
           </View>
         </ScrollView>
       </View>

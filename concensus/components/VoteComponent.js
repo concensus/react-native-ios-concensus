@@ -5,11 +5,12 @@ import {
 } from 'react-native';
 import ConcensusButton from './ConcensusButton'
 import { Fingerprint } from "expo";
+import { updateUserVote } from '../api/firebase';
 
 export const VOTE_ENUM = {
   YES: 0,
-  NO: 1,
-  MAYBE: 2
+  MAYBE: 1,
+  NO: 2,
 };
 
 export default class VoteComponent extends React.Component {
@@ -20,11 +21,13 @@ export default class VoteComponent extends React.Component {
 
 
   async onPressButton(vote, navigate) {
+    const userID = 'Andy';
     const response = await Fingerprint.authenticateAsync("Authorize Your Vote");
 
     if (response.success) {
       // TODO: (rcheung) - Send firebase request to persist selection
       console.log("Authenticated: " + response.success + ", vote: " + vote);
+      updateUserVote(userID, vote);
 
       // TODO: (rcheung) - Navigate to PollResults upon expiry
       // navigate('PollResults')
@@ -50,21 +53,21 @@ export default class VoteComponent extends React.Component {
           onPress={() => this.onPressButton(VOTE_ENUM.YES, navigate)}
           label={"Yes"}
         />
-        <Text style={{ color: '#666', textAlign: 'center'}}>{radioGroupData[0]}</Text>
+        <Text style={{ color: '#666', textAlign: 'center'}}>{radioGroupData[0].label}</Text>
 
         <ConcensusButton
           style={{marginTop: 20, backgroundColor: '#888'}}
-          onPress={() => this.onPressButton(VOTE_ENUM.NO, navigate)}
+          onPress={() => this.onPressButton(VOTE_ENUM.MAYBE, navigate)}
           label={"Meh"}
         />
-        <Text style={{ color: '#666', textAlign: 'center'}}>{radioGroupData[1]}</Text>
+        <Text style={{ color: '#666', textAlign: 'center'}}>{radioGroupData[1].label}</Text>
 
         <ConcensusButton
           style={{marginTop: 20, backgroundColor: '#aa2517'}}
-          onPress={() => this.onPressButton(VOTE_ENUM.MAYBE, navigate)}
+          onPress={() => this.onPressButton(VOTE_ENUM.NO, navigate)}
           label={"No"}
         />
-        <Text style={{ color: '#666', textAlign: 'center'}}>{radioGroupData[2]}</Text>
+        <Text style={{ color: '#666', textAlign: 'center'}}>{radioGroupData[2].label}</Text>
       </View>
       );
   }

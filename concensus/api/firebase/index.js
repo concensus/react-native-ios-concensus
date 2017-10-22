@@ -30,9 +30,8 @@ function updateUserVote(userID, option){
 }
 
 function getUserVote(userID){
-  firebase.database().ref(`users/${userID}`).once(value=>{
-    return value
-  })
+  return firebase.database().ref(`users/${userID}`)
+    .once('value');
 }
 
 export {firebase, isEmpty, newComment,updateUserVote, getUserVote};

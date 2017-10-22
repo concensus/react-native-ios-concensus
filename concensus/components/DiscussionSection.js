@@ -118,7 +118,7 @@ class DiscussionInput extends React.Component {
     }
 
     newComment(this.props.pollID, {
-      author: this.props.userID || 'andy',
+      author: this.props.userID || 'Anonymous',
       body: this.state.text
     });
 
