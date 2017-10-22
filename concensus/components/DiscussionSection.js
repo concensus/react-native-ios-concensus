@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import {
-  ScrollView,
   StyleSheet,
   Text,
   TextInput,
   View,
-  ListView
+  ListView,
+  KeyboardAvoidingView,
+  Keyboard
 } from 'react-native';
 import DiscussionPost from './DiscussionPost';
 import {firebase, newComment} from "../api/firebase"
@@ -15,12 +16,31 @@ export default class DiscussionSection extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      discussions: []
+      discussions: [],
+      keyboardOpen: false
     };
+  }
+
+  componentWillMount () {
+    this.keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', this._keyboardDidShow.bind(this));
+    this.keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', this._keyboardDidHide.bind(this));
+  }
+
+  componentWillUnmount () {
+    this.keyboardDidShowListener.remove();
+    this.keyboardDidHideListener.remove();
   }
 
   componentDidMount(){
     this.getDiscussion();
+  }
+
+  _keyboardDidShow () {
+    this.setState({ keyboardOpen: true });
+  }
+
+  _keyboardDidHide () {
+    this.setState({ keyboardOpen: false });
   }
 
   getDiscussion(){
@@ -41,23 +61,24 @@ export default class DiscussionSection extends Component {
   renderComments() {
     if (this.state.discussions.length == 0) {
       return (
-        <View>
+        <KeyboardAvoidingView behavior="padding">
           <Text>No Comments</Text>
-          <DiscussionInput />
-        </View>
+          <DiscussionInput style={{ flexBasis: '10%' }} />
+          <View style={{ height: this.state.keyboardOpen ? 100 : 0 }} />
+        </KeyboardAvoidingView>
       );
     } else {
       const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+      console.log('~~~', this.state.keyboardOpen ? '20%' : '80%');
       return (
-        <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'flex-start' }}>
-          <ScrollView style={{ flexBasis: '80%' }}>
-            <ListView
-              dataSource={ds.cloneWithRows(this.state.discussions)}
-              renderRow={(post) => <DiscussionPost post={post} />}
-            />
-          </ScrollView>
+        <KeyboardAvoidingView behavior="padding" style={{ flex: 1, flexDirection: 'column', justifyContent: 'flex-start' }}>
+          <ListView
+            style={{ flexBasis: this.state.keyboardOpen ? '20%' : '80%' }}
+            dataSource={ds.cloneWithRows(this.state.discussions)}
+            renderRow={(post) => <DiscussionPost post={post} />}
+          />
           <DiscussionInput style={{ flexBasis: '10%' }} />
-        </View>
+        </KeyboardAvoidingView>
       );
     }
   }
@@ -87,7 +108,7 @@ class DiscussionInput extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      text: ''
+      text: '',
     };
   }
 
@@ -134,7 +155,7 @@ class DiscussionInput extends React.Component {
         <ConcensusButton
           style={{height: inputHeight, fontSize: 17, marginLeft: 7, marginTop: 0, marginBottom: 0}}
           label='Post'
-          onPress={this.onPostPress}
+          onPress={this.onPostPress.bind(this)}
         />
       </View>
     );
