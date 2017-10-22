@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
   },
   heading: {
     fontSize: 25,
-    fontFamily: 'Baskerville',
+    fontFamily: 'Lato-Regular',
     marginBottom: 10
   }
 });
