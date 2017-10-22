@@ -4,21 +4,40 @@ import {
 	View
 } from 'react-native';
 import ConcensusButton from './ConcensusButton'
+import { Fingerprint } from "expo";
 
-  export default class VoteComponent extends React.Component {
+const VOTE_ENUM = {
+  YES: 0,
+  NO: 1,
+  MAYBE: 2
+}
 
-    constructor(props) {
+export default class VoteComponent extends React.Component {
+
+
+
+  constructor(props) {
      super(props);
     /*
     */
     console.log(this.props.numVotes);
+
   }
 
-  onPressMeh(event) {
-    console.log("Voting meh!")
+
+  async onPressButton(vote, navigate) {
+    const response = await Fingerprint.authenticateAsync("Authorize Your Vote");
+    console.log("Authenticated: " + response.success + ", vote: " + vote);
+
+    if (response.success){
+      //Checkmark animation here
+      navigate('PollResults')
+    }
+    else {
+      //Try again animation here
+    }
   }
 
-      
   render() {
     /* Go ahead and delete ExpoConfigView and replace it with your
     * content, we just wanted to give you a quick view of your config */
@@ -39,21 +58,21 @@ import ConcensusButton from './ConcensusButton'
     	<View style={{...style}}>
         <ConcensusButton
           style={{backgroundColor: '#31823d'}}
-          onPress={() => navigate('PollResults')}
+          onPress={() => this.onPressButton(VOTE_ENUM.YES, navigate)}
           label={"Yes"}
         />
         <Text style={{ color: '#666', textAlign: 'center'}}>I fully endorse this proposition.</Text>
 
         <ConcensusButton
           style={{marginTop: 20, backgroundColor: '#888'}}
-          onPress={this.onPressMeh}
+          onPress={() => this.onPressButton(VOTE_ENUM.NO, navigate)}
           label={"Meh"}
         />
         <Text style={{ color: '#666', textAlign: 'center'}}>I'm okay with this, but would like more time for discussion for it to better meet my needs.</Text>
 
         <ConcensusButton
           style={{marginTop: 20, backgroundColor: '#aa2517'}}
-          onPress={() => navigate('PollResults')}
+          onPress={() => this.onPressButton(VOTE_ENUM.MAYBE, navigate)}
           label={"No"}
         />
         <Text style={{ color: '#666', textAlign: 'center'}}>This counteracts my needs.</Text>

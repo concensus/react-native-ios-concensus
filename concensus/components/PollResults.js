@@ -1,10 +1,10 @@
 import React from 'react';
-import { 
-	StyleSheet, 
-	ScrollView, 
-	Text, 
+import {
+	StyleSheet,
+	ScrollView,
+	Text,
 	Image,
-	View 
+	View
 } from 'react-native';
 
 export default class PollComponent extends React.Component {

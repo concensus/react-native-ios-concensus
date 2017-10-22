@@ -36,10 +36,6 @@ const MainScreen = ({ navigation }) => {
         label='Weigh In'
         underlayColor='#888'
         onPress={onWeighInPress} />
-        <ConcensusButton
-          label='Authorize Vote'
-          underlayColor='#888'
-          onPress={onAuthorizePress} />
     </View>
   );
 };
