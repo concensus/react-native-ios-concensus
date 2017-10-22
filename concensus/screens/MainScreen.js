@@ -4,7 +4,8 @@ import {
 } from 'react-native';
 import ConcensusButton from '../components/ConcensusButton';
 
-import { Fingerprint } from "expo";
+// var Accounts = require('web3-eth-accounts');
+// var accounts = new Accounts('http://localhost:8545');
 
 const MainScreen = ({ navigation }) => {
   function onProposeMotionPress() {
@@ -15,19 +16,16 @@ const MainScreen = ({ navigation }) => {
     navigation.navigate('JoinPoll');
   }
 
-  async function onAuthorizePress() {
-    try {
-      const response = await Fingerprint.authenticateAsync("Authorize Your Vote");
-      console.log("Authenticated: " + response.success);
-      // do something with response
-    } catch(error) {
-      // do something with error
-    }
-
+  function onCreatePress() {
+    navigation.navigate('CreateAccount');
   }
 
   return (
     <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'center', padding: 20 }}>
+      <ConcensusButton
+        label='Create An Account'
+        underlayColor='#888'
+        onPress={onCreatePress} />
       <ConcensusButton
         label='Propose a Motion'
         underlayColor='#888'

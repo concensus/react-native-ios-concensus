@@ -6,6 +6,7 @@ import NewPollScreen from '../screens/NewPollScreen';
 import PollScreen from '../screens/PollScreen';
 import JoinPollScreen from '../screens/JoinPollScreen';
 import PollResultsScreen from '../screens/PollResultsScreen';
+import CreateAccountScreen from '../screens/CreateAccountScreen';
 
 import registerForPushNotificationsAsync from '../api/registerForPushNotificationsAsync';
 
@@ -19,6 +20,9 @@ const RootStackNavigator = StackNavigator(
     },
     Poll: {
       screen: PollScreen,
+    },
+    CreateAccount: {
+      screen: CreateAccountScreen,
     },
     JoinPoll: {
       screen: JoinPollScreen,
