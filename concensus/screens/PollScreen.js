@@ -17,7 +17,15 @@ class PollScreen extends React.Component {
     /* Go ahead and delete ExpoConfigView and replace it with your
     * content, we just wanted to give you a quick view of your config */
 
-    const navigate = this.props.navigation.navigate
+    const navigate = this.props.navigation.navigate;
+    const poll = this.props.navigation.state.params.poll;
+    const {
+      id,
+      subject,
+      description,
+      expiryInMinutes,
+      discussionExpiryInMinutes,
+    } = poll || {};
 
     let pic = {
       uri: 'https://upload.wikimedia.org/wikipedia/commons/d/de/Bananavarieties.jpg'
@@ -25,7 +33,6 @@ class PollScreen extends React.Component {
 
     let {height, width} = Dimensions.get('window');
     height = height - 40;
-    console.log('height', height);
 
     let styles = StyleSheet.create({
       contentContainer: {
@@ -41,23 +48,20 @@ class PollScreen extends React.Component {
       }
     });
 
-    let title = "Should we get bagels?";
-    let description = "The sleepy hackers are probably not going to want to eat leftover pasta for breakfast tomorrow. Also, we should have a food that slows the release of insulin coursing through their body after all the Red Bull, fruits, and other sugary snacks we left for them overnight. I propose a motion to have bagels delivered to fulfill this need.";
-
     return (
       <View style={styles.scrollContainer}>
       <ScrollView horizontal={false}
                   pagingEnabled={true}>
         <View style={styles.view}>
           <PollComponent numVotes={3}
-                         title={title}
+                         title={subject}
                          description={description}></PollComponent>
           <VoteComponent style={{ marginTop: 40 }}
                          navigate={navigate}>
           </VoteComponent>
         </View>
         <View style={styles.view}>
-          <DiscussionSection pollID={"HI"}></DiscussionSection>
+          <DiscussionSection pollID={id}></DiscussionSection>
         </View> 
       </ScrollView>
 

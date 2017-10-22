@@ -14,7 +14,7 @@ function isEmpty(obj){
   return obj.constructor === Object && Object.keys(obj).length === 0;
 }
 
-function newComment(id, object){
+function newComment(id, object) {
   let discussionRef = firebase.database().ref(`polls/${id}/discussions`);
   discussionRef.push({
     author: object.author || 'Anonymous',

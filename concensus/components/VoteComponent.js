@@ -27,8 +27,8 @@ export default class VoteComponent extends React.Component {
     const response = await Fingerprint.authenticateAsync("Authorize Your Vote");
     console.log("Authenticated: " + response.success + ", vote: " + vote);
 
-    if (response.success){
-      //Checkmark animation here
+    if (response.success) {
+      // TODO: (rcheung) - Navigate to PollResults upon expiry
       navigate('PollResults')
     }
     else {
