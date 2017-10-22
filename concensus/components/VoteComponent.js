@@ -7,7 +7,6 @@ import {
 	Image,
 	View 
 } from 'react-native';
-import { StackNavigator } from 'react-navigation'
 
   export default class VoteComponent extends React.Component {
 
@@ -22,6 +21,7 @@ import { StackNavigator } from 'react-navigation'
     console.log("Voting meh!")
   }
 
+      
   render() {
     /* Go ahead and delete ExpoConfigView and replace it with your
     * content, we just wanted to give you a quick view of your config */
