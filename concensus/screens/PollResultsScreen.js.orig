@@ -4,20 +4,23 @@ import {
 	ScrollView, 
 	Text, 
 	Image,
-	View 
+	View,
+  ProgressViewIOS,
 } from 'react-native';
 import Animation from 'lottie-react-native';
 import PollBars from '../components/PollBars.js'
 
 export default class PollResultsScreen extends React.Component {
+<<<<<<< Updated upstream
+=======
 
   componentDidMount() {
     this.animation.play();
   }
+>>>>>>> Stashed changes
 
   constructor(props) {
   	super(props);
-
   	console.log(this.props.numVotes);
   }
 
@@ -29,6 +32,17 @@ export default class PollResultsScreen extends React.Component {
       uri: 'https://upload.wikimedia.org/wikipedia/commons/d/de/Bananavarieties.jpg'
     };
 
+<<<<<<< Updated upstream
+    let pic2 = <Image source={require('../images/indigo.png')}/> //progressImage={pic2}
+
+    let progressValue = 0.5
+
+    return (
+      <View>
+        <Image source={pic} style={{width: 193, height: 110}}/>
+        <ProgressViewIOS progress={progressValue} 
+        progressViewStyle={'default'}/>
+=======
     let pollData = {'y': 0.75, 'n':0.25};
 
     return (
@@ -40,6 +54,7 @@ export default class PollResultsScreen extends React.Component {
         <Text style={{fontFamily: 'Baskerville', fontSize: 30 }}>Should we get bagels?</Text>
         <View style={{height:30}}></View>
         <PollBars data={pollData}/>
+>>>>>>> Stashed changes
       </View>
     	);
   }

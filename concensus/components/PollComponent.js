@@ -26,7 +26,7 @@ export default class PollComponent extends React.Component {
     return (
     	<View>
     		<Text style={{ fontFamily: 'Baskerville', fontSize: 30 }}>{this.props.title}</Text>
-    		<Text>{this.props.description}</Text>
+    		<Text style={{fontFamily: 'Baskerville', fontSize: 15  }}>{this.props.description}</Text>
     	</View>
     	);
 	}

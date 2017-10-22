@@ -50,17 +50,25 @@ class PollScreen extends React.Component {
                   pagingEnabled={true}>
         <View style={styles.view}>
           <PollComponent numVotes={3}
+<<<<<<< HEAD
+                         title="Should we get bagels?"
+                         description="Bagels and hotdog are both really important for our college life. So should we get bagels?"></PollComponent>
+          <VoteComponent style={{ marginTop: 40 }}
+                         navigate={navigate}>
+          </VoteComponent>
+
+=======
                          title={title}
                          description={description}></PollComponent>
           <VoteComponent style={{ marginTop: 40 }}
                          navigate={navigate}>
           </VoteComponent>
+>>>>>>> 4995e87... Adds results screen
         </View>
         <View style={styles.view}>
-          <DiscussionSection pollID={"HI"}></DiscussionSection>
+          <DiscussionSection pollID={"poll-id3"}></DiscussionSection>
         </View> 
       </ScrollView>
-
       </View>
       );
   }
