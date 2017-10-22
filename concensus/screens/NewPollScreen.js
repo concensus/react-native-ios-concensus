@@ -39,7 +39,7 @@ const Poll = t.struct({
   subject: t.String,
   proposal: t.String,
   endsInMinutes: t.Number,
-  concensusPercentage: t.Number,
+  consensusPercentage: t.Number,
 });
 
 const baseFont = {
