@@ -5,6 +5,7 @@ import {
   TextInput,
   View,
   ListView,
+  ScrollView,
   KeyboardAvoidingView,
   Keyboard
 } from 'react-native';
@@ -63,13 +64,12 @@ export default class DiscussionSection extends Component {
       return (
         <KeyboardAvoidingView behavior="padding">
           <Text>No Comments</Text>
-          <DiscussionInput style={{ flexBasis: '10%' }} />
+          <DiscussionInput style={{ flexBasis: '10%' }} {...this.props} />
           <View style={{ height: this.state.keyboardOpen ? 100 : 0 }} />
         </KeyboardAvoidingView>
       );
     } else {
       const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
-      console.log('~~~', this.state.keyboardOpen ? '20%' : '80%');
       return (
         <KeyboardAvoidingView behavior="padding" style={{ flex: 1, flexDirection: 'column', justifyContent: 'flex-start' }}>
           <ListView
@@ -77,7 +77,7 @@ export default class DiscussionSection extends Component {
             dataSource={ds.cloneWithRows(this.state.discussions)}
             renderRow={(post) => <DiscussionPost post={post} />}
           />
-          <DiscussionInput style={{ flexBasis: '10%' }} />
+          <DiscussionInput style={{ flexBasis: '10%' }} {...this.props} />
         </KeyboardAvoidingView>
       );
     }
@@ -150,12 +150,9 @@ class DiscussionInput extends React.Component {
             borderWidth: 1
           }}
           onChangeText={(text) => this.setState({text})}
+          onSubmitEditing={this.onPostPress.bind(this)}
+          returnKeyLabel="send"
           value={this.state.text}
-        />
-        <ConcensusButton
-          style={{height: inputHeight, fontSize: 17, marginLeft: 7, marginTop: 0, marginBottom: 0}}
-          label='Post'
-          onPress={this.onPostPress.bind(this)}
         />
       </View>
     );

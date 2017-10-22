@@ -55,7 +55,7 @@ class PollScreen extends React.Component {
 
         </View>
         <View style={styles.view}>
-          <DiscussionSection pollID={"poll-i2d"}></DiscussionSection>
+          <DiscussionSection pollID={"poll-id3"}></DiscussionSection>
         </View> 
       </ScrollView>
       </View>
