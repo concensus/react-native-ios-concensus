@@ -20,12 +20,26 @@ const MainScreen = ({ navigation }) => {
     navigation.navigate('CreateAccount');
   }
 
+  function renderAccountButton() {
+    if (navigation.state&&navigation.state.params&&navigation.state.params.verified) {
+      return(
+        <ConcensusButton
+          label='Account Verified'
+          underlayColor='#888' />
+      )
+    } else {
+      return (
+        <ConcensusButton
+          label='Create An Account'
+          underlayColor='#888'
+          onPress={onCreatePress} />
+      )
+    }
+  }
+
   return (
     <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'center', padding: 20 }}>
-      <ConcensusButton
-        label='Create An Account'
-        underlayColor='#888'
-        onPress={onCreatePress} />
+      {renderAccountButton()}
       <ConcensusButton
         label='Propose a Motion'
         underlayColor='#888'

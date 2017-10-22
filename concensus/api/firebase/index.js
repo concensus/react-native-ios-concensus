@@ -22,5 +22,18 @@ function newComment(id, object){
   })
 }
 
-export {firebase, isEmpty, newComment};
+function updateUserVote(userID, option){
+  let userRef = firebase.database().ref(`users/${userID}`);
+  userRef.set({
+    option
+  })
+}
+
+function getUserVote(userID){
+  firebase.database().ref(`users/${userID}`).once(value=>{
+    return value
+  })
+}
+
+export {firebase, isEmpty, newComment,updateUserVote, getUserVote};
 

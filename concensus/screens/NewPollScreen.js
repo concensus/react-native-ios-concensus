@@ -10,7 +10,7 @@ const Form = t.form.Form;
 const NewPollScreen = ({navigation}) => {
     
   function onProposePress() {
-    navigation.navigate('RQCodeShower');
+    navigation.navigate('QRCodeShower');
   }
 
   return (

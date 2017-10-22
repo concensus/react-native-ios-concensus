@@ -8,26 +8,25 @@ import {
 import ConcensusButton from '../components/ConcensusButton';
 const t = require('tcomb-form-native');
 const Form = t.form.Form;
+const axios = require('axios')
 
-const CreateAccountScreen = () => {
-
-  function dismissKeyboardAndShowAccount() {
-    Keyboard.dismiss();
-    console.log("Keyboard dismissed, displaying account");
-    //TODO: web3 call for getting account & private key
-    
-  }
+const CreateAccountScreen = ({ navigation }) => {
 
   function onAuthenticatePress() {
     //TODO: Twilio API call goes here
-    AlertIOS.prompt(
-      "Enter verification code.",
-      "Enter the SMS code that was just texted to you.",
-      [
-        {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
-        {text: 'OK', onPress: dismissKeyboardAndShowAccount()},
-      ]
-    );
+    axios.post('https://8fcefb12.ngrok.io/send/Andyyy').then(res=>{
+        AlertIOS.prompt(
+          "Enter verification code.",
+          "Enter the SMS code that was just texted to you.",
+          [
+            {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
+            {text: 'Verify', onPress: () => {
+              navigation.navigate('Home', {verified: true});
+              Keyboard.dismiss();
+            }},
+          ]
+        )
+    }).catch(console.log)
   }
 
   return (

@@ -54,7 +54,6 @@ export default class DiscussionSection extends Component {
           ...child.val(),
         })
       });
-
       this.setState({ discussions: discussionsSlice })
     })
   }

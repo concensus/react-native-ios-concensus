@@ -6,7 +6,7 @@ import NewPollScreen from '../screens/NewPollScreen';
 import PollScreen from '../screens/PollScreen';
 import JoinPollScreen from '../screens/JoinPollScreen';
 import PollResultsScreen from '../screens/PollResultsScreen';
-import RQCodeShowerScreen from '../screens/RQCodeShowerScreen';
+import QRCodeShowerScreen from '../screens/QRCodeShowerScreen';
 import CreateAccountScreen from '../screens/CreateAccountScreen';
 
 import registerForPushNotificationsAsync from '../api/registerForPushNotificationsAsync';
@@ -31,8 +31,8 @@ const RootStackNavigator = StackNavigator(
     PollResults: {
       screen: PollResultsScreen,
     },
-    RQCodeShower: {
-      screen: RQCodeShowerScreen,
+    QRCodeShowerScreen: {
+      screen: QRCodeShowerScreen,
     }
   },
   {
