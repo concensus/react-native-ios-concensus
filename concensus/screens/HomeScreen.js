@@ -6,16 +6,27 @@ import {
   StyleSheet,
   Text,
   TouchableOpacity,
-  View,
+  View, Button
 } from 'react-native';
 import { WebBrowser } from 'expo';
-
 import { MonoText } from '../components/StyledText';
+import PollClient from '../api/PollClient';
+
 
 export default class HomeScreen extends React.Component {
   static navigationOptions = {
     header: null,
   };
+
+  _createPoll () {
+    PollClient.createPoll("Climate Change", "Is it a hoax perpetrated by the Chinese?", 10, 10, 10,
+      {from: "0x170dc9830e34d11bf444b7395701b2619ef314b9"}
+    )
+    .then((contractAddress) => {
+      console.log("Returned contractAddress" + contractAddress);
+    })
+
+  }
 
   render() {
     return (
@@ -24,6 +35,13 @@ export default class HomeScreen extends React.Component {
           style={styles.container}
           contentContainerStyle={styles.contentContainer}>
           <View style={styles.welcomeContainer}>
+            <Button
+              onPress={() => this._createPoll()}
+              title="Learn More"
+              color="#841584"
+              accessibilityLabel="Learn more about this purple button"
+            />
+
             <Image
               source={
                 __DEV__
