@@ -9,53 +9,64 @@ import {
   View,
   ListView
 } from 'react-native';
-import {firebase, isEmpty} from "../../api/firebase"
+import {firebase,newComment} from "../../api/firebase"
 
 export default class DiscussionSection extends Component {
   constructor(props) {
     super(props);
-    var id = this.props.pollID;
-    // console.log('pollID',id);
-    firebase.database().ref('polls/'+id).on('value', (snapshot) => {
-      console.log('snapshot',snapshot.discussions);
-      // console.log("New high score: ",JSON.stringify(snapshot.polls[pollID]));
-      // firebase.database().ref('polls/'+id).set({
-      //   discussions: [{
-      //     author: "andy",
-      //     content: "this is content"
-      //   }]
-      // });
-    });
-
-    const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     this.state = {
-      discussions: ds.cloneWithRows([
-        {
-          author: "andy"
-        },
-        {
-          author: "andya"
-        }
-      ]),
+      discussions: []
     };
   }
+
+  componentDidMount(){
+    var id = this.props.pollID;
+    let discussionRef = firebase.database().ref(`polls/${id}/discussions`);
+    // discussionRef.on('child_added', data => {
+    //   console.log("data1", data)
+    // });
+    // discussionRef.on('child_changed', data => {
+    //   console.log("data2", data)
+    // });
+    this.getDiscussion();
+    // newComment(id, {
+    //   author: "andy2",
+    //   body: "okkkkk"
+    // })
+  }
+
+  getDiscussion(){
+    var id = this.props.pollID;
+    let discussionRef = firebase.database().ref(`polls/${id}/discussions`);
+    discussionRef.on("value", (snapshot)=>{
+      this.setState({ discussions: [] });
+      var discussionsSlice = this.state.discussions.slice();
+      snapshot.forEach(child => {
+        discussionsSlice.push({
+          ...child.val(),
+        })
+      });
+      this.setState({ discussions: discussionsSlice })
+    })
+  }
+  
   renderComments() {
-    if(this.state.discussions.length == 0){
-      return <Text>No Comments</Text>
-    }else{
+    const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+    if(this.state.discussions.length > 0){
       return(
         <ListView
-          dataSource={this.state.discussions}
-          renderRow={(rowData) => <Text>{rowData.author}</Text>}
+          dataSource={ds.cloneWithRows(this.state.discussions)}
+          renderRow={(d) => <Text>{d.author}: {d.body}</Text>}
         />
       )
     }
+    return <Text>No Comments</Text>;
   }
 
   render() {
     return (
       <View style={styles.container}>
-          {this.renderComments()}
+        {this.renderComments()}
       </View>
     );
   }

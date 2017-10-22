@@ -11,7 +11,15 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 
 function isEmpty(obj){
-  return Object.keys(obj).length === 0 && obj.constructor === Object;
+  return obj.constructor === Object && Object.keys(obj).length === 0;
 }
 
-export {firebase, isEmpty};
+function newComment(id, object){
+  let discussionRef = firebase.database().ref(`polls/${id}/discussions`);
+  discussionRef.push({
+    author: object.author || 'Anonymous',
+    body: object.body || ''
+  })
+}
+
+export {firebase, isEmpty, newComment};
