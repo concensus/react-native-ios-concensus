@@ -49,7 +49,7 @@ export default class App extends Component {
               Camera permission is not granted
             </Text>
             : <BarCodeScanner
-              onBarCodeRead={debounce(onBarCodeRead || this._handleBarCodeRead, 725).bind(this)}
+              onBarCodeRead={debounce(onBarCodeRead || this._handleBarCodeRead, 800).bind(this)}
               style={{
                 height: Dimensions.get('window').height,
                 width: Dimensions.get('window').width,
