@@ -1,9 +1,8 @@
 import React from 'react';
 import {
-    Button,
-    View,
+  View,
 } from 'react-native';
-import baseStyles from './shared/baseStyles';
+import ConcensusButton from '../components/ConcensusButton';
 
 const MainScreen = ({ navigation }) => {
   const onProposeMotionPress = ()  => {
@@ -12,11 +11,10 @@ const MainScreen = ({ navigation }) => {
 
   return (
     <View style={{ padding: 20 }}>
-      <Button
-        style={styles.button}
-        title="Propose a Motion"
-        onPress={onProposeMotionPress}
-      />
+      <ConcensusButton
+        label='Propose a Motion'
+        underlayColor='#888'
+        onPress={onProposeMotionPress} />
     </View>
   );
 };
@@ -25,11 +23,3 @@ MainScreen.navigationOptions = ({ navigation }) => ({
 });
 
 export default MainScreen;
-
-const styles = {
-  button: {
-    ...baseStyles,
-    fontSize: '30px',
-    fontWeight: 'bold'
-  }
-};
