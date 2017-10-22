@@ -3,10 +3,12 @@ import {
   ScrollView,
   StyleSheet,
   Text,
+  TextInput,
   View,
   ListView
 } from 'react-native';
 import DiscussionPost from './DiscussionPost';
+import ConcensusButton from './ConcensusButton';
 import {firebase, isEmpty} from "../api/firebase"
 
 export default class DiscussionSection extends Component {
@@ -46,14 +48,24 @@ export default class DiscussionSection extends Component {
       );
     } else {
       return (
-        <View>
-          <ScrollView>
+        <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'flex-start' }}>
+          <ScrollView style={{ flexGrow: 1 }}>
             <ListView
               dataSource={this.state.discussions}
               renderRow={(post) => <DiscussionPost post={post} />}
             />
           </ScrollView>
-          <View style={{flex: 1, flexDirection: 'row'}}>
+          <View style={{ flex: 1, marginTop: 10, flexDirection: 'row', borderColor: '#CCC', borderTopWidth: 1, paddingTop: 15 }}>
+            <TextInput
+              style={{ flex: 1, height: 40, padding: 3, borderColor: 'gray', backgroundColor: '#FFF', borderWidth: 1 }}
+              onChangeText={(text) => this.setState({text})}
+              value={this.state.text}
+            />
+            <ConcensusButton
+              style={{ flex: 1, fontSize: 17, marginLeft: 7, marginTop: 0, marginBottom: 0 }}
+              label='Post'
+              onPress={() => {}}
+            />
           </View>
         </View>
       );
