@@ -6,11 +6,11 @@ import {
 import ConcensusButton from './ConcensusButton'
 import { Fingerprint } from "expo";
 
-const VOTE_ENUM = {
+export const VOTE_ENUM = {
   YES: 0,
   NO: 1,
   MAYBE: 2
-}
+};
 
 export default class VoteComponent extends React.Component {
 

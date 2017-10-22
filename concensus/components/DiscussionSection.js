@@ -58,13 +58,13 @@ export default class DiscussionSection extends Component {
     })
   }
 
-  renderComments() {
+  renderComments({ readOnly }) {
     if (this.state.discussions.length == 0) {
       return (
         <KeyboardAvoidingView behavior="padding">
           <Text>No Comments</Text>
-          <DiscussionInput style={{ flexBasis: '10%' }} {...this.props} />
-          <View style={{ height: this.state.keyboardOpen ? 100 : 0 }} />
+          { !readOnly && <DiscussionInput style={{ flexBasis: '10%' }} {...this.props} /> }
+          { !readOnly && <View style={{ height: this.state.keyboardOpen ? 100 : 0 }} /> }
         </KeyboardAvoidingView>
       );
     } else {
@@ -76,17 +76,18 @@ export default class DiscussionSection extends Component {
             dataSource={ds.cloneWithRows(this.state.discussions)}
             renderRow={(post) => <DiscussionPost post={post} />}
           />
-          <DiscussionInput style={{ flexBasis: '10%' }} {...this.props} />
+          { !readOnly && <DiscussionInput style={{ flexBasis: '10%' }} {...this.props} /> }
         </KeyboardAvoidingView>
       );
     }
   }
 
   render() {
+    const { readOnly } = this.props;
     return (
       <View style={styles.container}>
         <Text style={styles.heading}>Discourse</Text>
-        {this.renderComments()}
+        {this.renderComments({ readOnly })}
       </View>
     );
   }

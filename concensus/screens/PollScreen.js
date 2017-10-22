@@ -8,10 +8,16 @@ import {
 	View 
 } from 'react-native';
 import PollComponent from '../components/PollComponent.js'
-import VoteComponent from '../components/VoteComponent.js'
+import VoteComponent, { VOTE_ENUM } from '../components/VoteComponent.js'
 import DiscussionSection from '../components/DiscussionSection.js'
 
 class PollScreen extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      vote: null
+    };
+  }
 
   render() {
     /* Go ahead and delete ExpoConfigView and replace it with your
@@ -50,21 +56,21 @@ class PollScreen extends React.Component {
 
     return (
       <View style={styles.scrollContainer}>
-      <ScrollView horizontal={false}
-                  pagingEnabled={true}>
-        <View style={styles.view}>
-          <PollComponent numVotes={3}
-                         title={subject}
-                         description={description}></PollComponent>
-          <VoteComponent style={{ marginTop: 40 }}
-                         navigate={navigate}>
-          </VoteComponent>
-        </View>
-        <View style={styles.view}>
-          <DiscussionSection pollID={id}></DiscussionSection>
-        </View> 
-      </ScrollView>
-
+        <ScrollView horizontal={false}
+                    pagingEnabled={true}>
+          <View style={styles.view}>
+            <PollComponent numVotes={3}
+                           title={subject}
+                           description={description}></PollComponent>
+            <VoteComponent style={{ marginTop: 40 }}
+                           navigate={navigate}>
+            </VoteComponent>
+          </View>
+          <View style={styles.view}>
+            <DiscussionSection pollID={id}
+                               readOnly={this.state.vote !== VOTE_ENUM.MAYBE}/>
+          </View>
+        </ScrollView>
       </View>
       );
   }
