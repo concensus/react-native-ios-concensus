@@ -13,7 +13,7 @@ const NewPollScreen = ({navigation}) => {
   function onProposePress() {
     navigation.navigate('QRCodeShower');
 
-    axios.post('http://8fcefb12.ngrok.io/createPoll');
+    axios.post('http://4d23f078.ngrok.io/createPoll');
   }
 
   return (

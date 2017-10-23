@@ -32,9 +32,9 @@ export default class VoteComponent extends React.Component {
               this.props.startTimer();
           }
       //Checkmark animation here
-      axios.post("https://8fcefb12.ngrok.io/", {
-        voteType: vote,
-        account: "0x267042459ba40cd52ff2711bb6c95963f4b76da6"
+      axios.post("http://4d23f078.ngrok.io/vote", {
+        voteType: 1,
+        account: "0xa363810c1eda270f2cb6ed88ddaa6fea5f4116e2"
       })
       .then(function (response) {
         console.log(response);

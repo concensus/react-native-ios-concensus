@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 import {
   Dimensions,
   StyleSheet,
@@ -77,7 +78,7 @@ class PollScreen extends React.Component {
       this.setState(previousState => {
         console.log('previousState', previousState.timeRemaining);
         if (previousState.timeRemaining < 1) {
-          axios.delete("http://8fcefb12.ngrok.io/votes")
+          axios.delete("http://4d23f078.ngrok.io/votes")
         }
         return {timeRemaining: previousState.timeRemaining - 1}
       });
