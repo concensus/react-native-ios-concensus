@@ -19,6 +19,8 @@ class PollScreen extends React.Component {
     constructor(props) {
         super(props);
 
+        this.Vote = new Vote();
+
         const poll = this.props.navigation.state.params.poll;
         // const { id, subject, description, expiryInMinutes, discussionExpiryInMinutes } = poll || {};
 
@@ -59,7 +61,7 @@ class PollScreen extends React.Component {
             this.setState(previousState => {
                 console.log('previousState', previousState.timeRemaining);
                 if (previousState.timeRemaining < 1) {
-                    Vote.delete();
+                    this.Vote.delete();
                 }
                 return { timeRemaining: previousState.timeRemaining - 1 };
             });
