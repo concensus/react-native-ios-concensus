@@ -1,5 +1,6 @@
 import React from 'react';
-import { View } from 'react-native';
+import { Text, View } from 'react-native';
+import { startCase } from 'lodash';
 import AccountClient from '../lib/concensus-sdk/web3/account';
 import ConcensusButton from '../components/ConcensusButton';
 import Config from '../env';
@@ -29,8 +30,7 @@ const MainScreen = ({ navigation }) => {
 
     function renderAccountButton() {
         const style = {
-            marginTop: -30,
-            marginBottom: 30
+            marginBottom: 100
         };
 
         if (Config.ACTIVE_ENV === 'development') {
@@ -63,7 +63,9 @@ const MainScreen = ({ navigation }) => {
                 onPress={onProposeMotionPress}
             />
             <ConcensusButton label="Weigh In" underlayColor="#888" onPress={onWeighInPress} />
-
+            <Text style={{ textAlign: 'center', marginTop: 200 }}>
+                {startCase(Config.ACTIVE_ENV)} Mode
+            </Text>
         </View>
     );
 };
