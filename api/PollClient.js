@@ -92,4 +92,4 @@ class PollClient {
     }
 }
 
-export default new PollClient();
+export default PollClient;

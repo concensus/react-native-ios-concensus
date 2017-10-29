@@ -1,11 +1,14 @@
 import React from 'react';
 import { View } from 'react-native';
+import PollClient from '../api/PollClient';
 import ConcensusButton from '../components/ConcensusButton';
 
 // var Accounts = require('web3-eth-accounts');
 // var accounts = new Accounts('http://localhost:8545');
 
 const MainScreen = ({ navigation }) => {
+    const pollClient = new PollClient();
+
     function onProposeMotionPress() {
         navigation.navigate('NewPoll');
     }
