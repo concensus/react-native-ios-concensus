@@ -8,6 +8,7 @@ import JoinPollScreen from '../screens/JoinPollScreen';
 import PollResultsScreen from '../screens/PollResultsScreen';
 import QRCodeShowerScreen from '../screens/QRCodeShowerScreen';
 import CreateAccountScreen from '../screens/CreateAccountScreen';
+import SelectTestAccountScreen from '../screens/SelectTestAccountScreen';
 
 import registerForPushNotificationsAsync from '../lib/api/registerForPushNotificationsAsync';
 
@@ -15,6 +16,9 @@ const RootStackNavigator = StackNavigator(
   {
     Home: {
       screen: MainScreen,
+    },
+    SelectTestAccount: {
+      screen: SelectTestAccountScreen,
     },
     NewPoll: {
       screen: NewPollScreen,
