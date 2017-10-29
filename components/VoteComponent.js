@@ -3,7 +3,7 @@ import axios from 'axios';
 import { Text, View } from 'react-native';
 import ConcensusButton from './ConcensusButton';
 import { Fingerprint } from 'expo';
-import { updateUserVote } from '../api/firebase';
+import { updateUserVote } from '../lib/api/firebase';
 
 export const VOTE_ENUM = {
   YES: 0,

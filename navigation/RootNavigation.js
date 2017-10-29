@@ -9,7 +9,7 @@ import PollResultsScreen from '../screens/PollResultsScreen';
 import QRCodeShowerScreen from '../screens/QRCodeShowerScreen';
 import CreateAccountScreen from '../screens/CreateAccountScreen';
 
-import registerForPushNotificationsAsync from '../api/registerForPushNotificationsAsync';
+import registerForPushNotificationsAsync from '../lib/api/registerForPushNotificationsAsync';
 
 const RootStackNavigator = StackNavigator(
   {

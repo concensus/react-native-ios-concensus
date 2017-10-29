@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, ScrollView } from 'react-native';
+import { Poll } from '../lib/concensus-sdk';
 import ConcensusButton from '../components/ConcensusButton';
-import axios from 'axios';
 const t = require('tcomb-form-native');
 const Form = t.form.Form;
 
@@ -9,13 +9,13 @@ const NewPollScreen = ({ navigation }) => {
     function onProposePress() {
         navigation.navigate('QRCodeShower');
 
-        axios.post('http://4d23f078.ngrok.io/createPoll');
+        Poll.create();
     }
 
     return (
         <View style={{ padding: 20 }}>
             <ScrollView>
-                <Form type={Poll} />
+                <Form type={PollType} />
             </ScrollView>
             <ConcensusButton label="Propose Motion" onPress={onProposePress} />
         </View>
@@ -28,7 +28,7 @@ NewPollScreen.navigationOptions = ({ navigation }) => ({
 
 export default NewPollScreen;
 
-const Poll = t.struct({
+const PollType = t.struct({
     subject: t.String,
     proposal: t.String,
     endsInMinutes: t.Number,

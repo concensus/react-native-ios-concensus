@@ -9,7 +9,7 @@ import {
     Keyboard,
 } from 'react-native';
 import DiscussionPost from './DiscussionPost';
-import { firebase, newComment } from '../api/firebase';
+import { firebase, newComment } from '../lib/api/firebase';
 
 export default class DiscussionSection extends Component {
     constructor(props) {
