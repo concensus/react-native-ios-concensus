@@ -1,33 +1,26 @@
 import React from 'react';
-import { 
-	StyleSheet, 
-	ScrollView, 
-	Text, 
-	Image,
-	View 
-} from 'react-native';
+import { Text, View } from 'react-native';
 
 export default class PollComponent extends React.Component {
-
-	constructor(props) {
-		super(props);
-		/*
+    constructor(props) {
+        super(props);
+        /*
 		* title
 		* pollDescription
 		*/
-		console.log('poll description', this.props.description)
-		console.log(this.props.numVotes);
-	}
+        console.log('poll description', this.props.description);
+        console.log(this.props.numVotes);
+    }
 
-	render() {
+    render() {
     /* Go ahead and delete ExpoConfigView and replace it with your
     * content, we just wanted to give you a quick view of your config */
 
-    return (
-    	<View>
-    		<Text style={{ fontFamily: 'Baskerville', fontSize: 30 }}>{this.props.title}</Text>
-    		<Text style={{fontFamily: 'Baskerville', fontSize: 15  }}>{this.props.description}</Text>
-    	</View>
-    	);
-	}
+        return (
+            <View>
+                <Text style={{ fontFamily: 'Baskerville', fontSize: 30 }}>{this.props.title}</Text>
+                <Text style={{ fontFamily: 'Baskerville', fontSize: 15 }}>{this.props.description}</Text>
+            </View>
+        );
+    }
 }

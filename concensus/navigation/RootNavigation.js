@@ -33,22 +33,22 @@ const RootStackNavigator = StackNavigator(
     },
     QRCodeShower: {
       screen: QRCodeShowerScreen,
-    }
+    },
   },
   {
     navigationOptions: () => ({
       headerTitleAllowFontScaling: false,
       headerStyle: {
-        backgroundColor: '#EFEFEF'
+        backgroundColor: '#EFEFEF',
       },
       headerTitleStyle: {
         fontWeight: 'normal',
         fontFamily: 'Baskerville',
         color: '#333',
-        fontSize: 20
+        fontSize: 20,
       },
       headerBackTitle: null,
-      headerTintColor: '#333'
+      headerTintColor: '#333',
     }),
   }
 );
@@ -74,14 +74,10 @@ export default class RootNavigator extends React.Component {
     registerForPushNotificationsAsync();
 
     // Watch for incoming notifications
-    this._notificationSubscription = Notifications.addListener(
-      this._handleNotification
-    );
+    this._notificationSubscription = Notifications.addListener(this._handleNotification);
   }
 
   _handleNotification = ({ origin, data }) => {
-    console.log(
-      `Push notification ${origin} with data: ${JSON.stringify(data)}`
-    );
+    console.log(`Push notification ${origin} with data: ${JSON.stringify(data)}`);
   };
 }
