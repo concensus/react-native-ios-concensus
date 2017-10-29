@@ -59,3 +59,6 @@ typings/
 
 .DS_Store
 .idea
+
+node_modules/**/*
+.expo/**/*
