@@ -16,6 +16,12 @@ More on Expo: http://expo.io
 npm install
 ```
 
+### Environment Variables
+The application expects the following environment variables to be defined in `env.js`
+* `TESTRPC_ADDRESS` - Required for local development
+* `DEFAULT_GAS`
+* `DEFAULT_USER_ID`
+
 ### Run application with Expo XDE
 * Start Expo XDE
 * Project > Open Project > Navigate to where you've cloned the project locally

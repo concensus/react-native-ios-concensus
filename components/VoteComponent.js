@@ -1,4 +1,5 @@
 import React from 'react';
+import Config from '../env';
 import axios from 'axios';
 import { Text, View } from 'react-native';
 import ConcensusButton from './ConcensusButton';
@@ -18,7 +19,7 @@ export default class VoteComponent extends React.Component {
   }
 
     async onPressButton(vote, navigate) {
-    const userID = 'Andy';
+    const userID = Config.DEFAULT_USER_ID;
     const response = await Fingerprint.authenticateAsync('Authorize Your Vote');
 
     if (response.success) {

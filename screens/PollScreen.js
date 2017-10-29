@@ -1,4 +1,5 @@
 import React from 'react';
+import Config from '../env';
 import { Dimensions, StyleSheet, ScrollView, Text, View } from 'react-native';
 import PollComponent from '../components/PollComponent.js';
 import VoteComponent, { VOTE_ENUM } from '../components/VoteComponent.js';
@@ -36,7 +37,7 @@ class PollScreen extends React.Component {
     }
 
     componentWillMount() {
-        const userID = 'Andy';
+        const userID = Config.DEFAULT_USER_ID;
 
         const interval = setInterval(() => {
             getUserVote(userID).then(response => {
@@ -83,7 +84,7 @@ class PollScreen extends React.Component {
     }
 
     render() {
-        // const userID = 'Andy';
+        // const userID = process.env.DEFAULT_USER_ID;
 
         const navigate = this.props.navigation.navigate;
 
