@@ -5,13 +5,11 @@ import ConcensusButton from '../components/ConcensusButton';
 const t = require('tcomb-form-native');
 const Form = t.form.Form;
 
-const PollClient = new Poll();
-
 const NewPollScreen = ({ navigation }) => {
     function onProposePress() {
         navigation.navigate('QRCodeShower');
 
-        PollClient.create();
+        Poll.create();
     }
 
     return (
