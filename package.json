@@ -52,7 +52,7 @@
     "prettier": "1.7.4",
     "querystring-es3": "0.2.1",
     "react-native-crypto": "2.1.1",
-    "react-native-pbkdf2-shim": "git+https://git@github.com/wswoodruff/react-native-pbkdf2-shim.git",
+    "react-native-pbkdf2-shim": "git+https://git@github.com/concensus/react-native-pbkdf2-shim.git",
     "react-native-randombytes": "3.0.0",
     "readable-stream": "2.3.3",
     "stream-browserify": "2.0.1",
