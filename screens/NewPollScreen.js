@@ -1,26 +1,38 @@
 import React from 'react';
 import { View, ScrollView } from 'react-native';
+import PollClient from '../lib/concensus-sdk/web3/poll';
 import ConcensusButton from '../components/ConcensusButton';
-import axios from 'axios';
 const t = require('tcomb-form-native');
 const Form = t.form.Form;
 
-const NewPollScreen = ({ navigation }) => {
-    function onProposePress() {
-        navigation.navigate('QRCodeShower');
+const Poll = new PollClient();
+const VOTES_ALLOWED = 10;
 
-        axios.post('http://4d23f078.ngrok.io/createPoll');
-    }
+class NewPollScreen extends React.Component {
+  onProposePress() {
+    const { navigation } = this.props;
+    navigation.navigate('QRCodeShower');
+    const formValues = this.refs.form.getValue();
+    Poll.create({
+      title: formValues.subject,
+      proposition: formValues.proposal,
+      endTime: formValues.endsInMinutes,
+      votesRequired: (formValues.consensusPercentage / 100) * VOTES_ALLOWED,
+      votesAllowed: VOTES_ALLOWED
+    });
+  }
 
+  render() {
     return (
-        <View style={{ padding: 20 }}>
-            <ScrollView>
-                <Form type={Poll} />
-            </ScrollView>
-            <ConcensusButton label="Propose Motion" onPress={onProposePress} />
-        </View>
+      <View style={{padding: 20}}>
+        <ScrollView>
+          <Form ref="form" type={PollType}/>
+        </ScrollView>
+        <ConcensusButton label="Propose Motion" onPress={this.onProposePress.bind(this)}/>
+      </View>
     );
-};
+  }
+}
 
 NewPollScreen.navigationOptions = ({ navigation }) => ({
     title: 'Propose a Motion',
@@ -28,7 +40,7 @@ NewPollScreen.navigationOptions = ({ navigation }) => ({
 
 export default NewPollScreen;
 
-const Poll = t.struct({
+const PollType = t.struct({
     subject: t.String,
     proposal: t.String,
     endsInMinutes: t.Number,

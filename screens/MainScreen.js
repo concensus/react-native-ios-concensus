@@ -1,6 +1,6 @@
 import React from 'react';
 import { View } from 'react-native';
-import PollClient from '../api/PollClient';
+import PollClient from '../lib/concensus-sdk/web3/poll';
 import ConcensusButton from '../components/ConcensusButton';
 
 // var Accounts = require('web3-eth-accounts');

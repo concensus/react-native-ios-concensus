@@ -1,10 +1,11 @@
 import React from 'react';
-import axios from 'axios';
+import Config from '../env';
 import { Dimensions, StyleSheet, ScrollView, Text, View } from 'react-native';
 import PollComponent from '../components/PollComponent.js';
 import VoteComponent, { VOTE_ENUM } from '../components/VoteComponent.js';
 import DiscussionSection from '../components/DiscussionSection.js';
-import { getUserVote } from '../api/firebase';
+import { getUserVote } from '../lib/api/firebase';
+import { Vote } from '../lib/concensus-sdk';
 
 function msToTime(s) {
     let secs = s % 60;
@@ -36,7 +37,7 @@ class PollScreen extends React.Component {
     }
 
     componentWillMount() {
-        const userID = 'Andy';
+        const userID = Config.DEFAULT_USER_ID;
 
         const interval = setInterval(() => {
             getUserVote(userID).then(response => {
@@ -59,7 +60,7 @@ class PollScreen extends React.Component {
             this.setState(previousState => {
                 console.log('previousState', previousState.timeRemaining);
                 if (previousState.timeRemaining < 1) {
-                    axios.delete('http://4d23f078.ngrok.io/votes');
+                    Vote.delete();
                 }
                 return { timeRemaining: previousState.timeRemaining - 1 };
             });
@@ -83,7 +84,7 @@ class PollScreen extends React.Component {
     }
 
     render() {
-        // const userID = 'Andy';
+        // const userID = process.env.DEFAULT_USER_ID;
 
         const navigate = this.props.navigation.navigate;
 
