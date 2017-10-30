@@ -1,7 +1,7 @@
 import React from 'react';
 import { Text, View } from 'react-native';
 import { startCase } from 'lodash';
-import AccountClient from '../lib/concensus-sdk/web3/account';
+import accountClient from '../lib/concensus-sdk/web3/account';
 import ConcensusButton from '../components/ConcensusButton';
 import Config from '../env';
 
@@ -9,8 +9,6 @@ import Config from '../env';
 // var accounts = new Accounts('http://localhost:8545');
 
 const MainScreen = ({ navigation }) => {
-    const accountClient = new AccountClient();
-
     function onProposeMotionPress() {
         navigation.navigate('NewPoll');
     }
@@ -57,12 +55,17 @@ const MainScreen = ({ navigation }) => {
     return (
         <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'center', padding: 20 }}>
             {renderAccountButton()}
-            <ConcensusButton
-                label="Propose a Motion"
-                underlayColor="#888"
-                onPress={onProposeMotionPress}
-            />
-            <ConcensusButton label="Weigh In" underlayColor="#888" onPress={onWeighInPress} />
+            {
+               accountClient.getAccount() !== null &&
+               <View>
+                   <ConcensusButton
+                       label="Propose a Motion"
+                       underlayColor="#888"
+                       onPress={onProposeMotionPress}
+                   />
+                   <ConcensusButton label="Weigh In" underlayColor="#888" onPress={onWeighInPress} />
+               </View>
+            }
             <Text style={{ textAlign: 'center', marginTop: 200 }}>
                 {startCase(Config.ACTIVE_ENV)} Mode
             </Text>
